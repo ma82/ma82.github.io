@@ -201,3 +201,8 @@ below.
 \end{code}
 
 2013 Nov 19, matteo.acerbi@gmail.com
+
+## Updates
+
+With Agda Wed Nov 20 17:09:04 CET 2013 `□→⟦⟧` does not pass
+termination checking anymore.
