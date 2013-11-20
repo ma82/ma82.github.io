@@ -3,7 +3,7 @@
 \begin{code}
 module Inf where
 
-open import Function      using (_∘_)
+open import Function      using (_∘_ ; id)
 open import Data.Product  using    (Σ ; _,_)
                           renaming (proj₁ to fst ; proj₂ to snd)
 open import Data.Sum as ⊎ using (_⊎_)
@@ -177,7 +177,7 @@ If we `C-c C-n o` we do not get stack overflows.
 Finally, Agsy timeouts in the following hole.
 
 \begin{code}
--- inferN∋o : N ∋ o → N ∋ ?
+-- inferN∋o : N ∋ o → N ∋ {!!}
 -- inferN∋o = id
 \end{code}
 
