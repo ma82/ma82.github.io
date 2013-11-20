@@ -118,6 +118,7 @@ non-dependent predicates.
 \begin{code}
 module □→⟦⟧ {I : Set}{X Y : Pow I} where
 
+  {-# NO_TERMINATION_CHECK #-}
   □→⟦⟧ : ∀ D → Σ (⟦ D ⟧ X) (□ (Y ∘ fst) D) → ⟦ D ⟧ Y
   ■→⟦⟧ : ∀ D → Σ (⟦ D ⟧ X) (■ (Y ∘ fst) D) → ⟦ D ⟧ Y
   □→⟦⟧ (`I j  ) (xs , □I ih) = ih
@@ -205,4 +206,7 @@ below.
 ## Updates
 
 With Agda Wed Nov 20 17:09:04 CET 2013 `□→⟦⟧` does not pass
-termination checking anymore.
+termination checking anymore, and to generate this HTML file anyway I
+had to disable it for that definition.
+
+2013 Nov 20, matteo.acerbi@gmail.com
