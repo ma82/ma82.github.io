@@ -73,10 +73,8 @@ open ν
 
 ### Box
 
-We (now) use a coinductive-recursive definition.
-
 \begin{code}
-module Lifting {I}{X : Pow I}(P : Pow/ X) where
+module Box {I}{X : Pow I}(P : Pow/ X) where
 
   mutual
 
@@ -89,7 +87,7 @@ module Lifting {I}{X : Pow I}(P : Pow/ X) where
       constructor <_>
       field       >_< : □ (% F r) ] xs [
 
-open Lifting; open ■
+open Box; open ■
 \end{code}
 
 ### All
@@ -106,24 +104,17 @@ module All {I : Set}{X : Pow I}{P : Pow/ X}(m : ∀ x → P x) where
 
 ### Non-dependent predicates lemma
 
-We can obtain functorial values from proofs of liftings of
-non-dependent predicates.
-
 \begin{code}
 module □→⟦⟧ {I : Set}{X Y : Pow I} where
 
-    □→⟦⟧ : ∀ D       → (xs : ⟦ D ⟧ X) → □ (Y ∘ fst)     D   xs → ⟦ D ⟧ Y
-    ■→⟦⟧ : ∀ {R} F r → (xs : ν F X r) → ■ (Y ∘ fst) {R} F r xs → ν F Y r
-    □→⟦⟧ (`I i  ) xs ih   = ih
-    □→⟦⟧ (`ν F r) xs ih = ■→⟦⟧ F r xs ih
-    ] ■→⟦⟧ F r xs ih [  = □→⟦⟧ (% F r) ] xs [ > ih < 
+  □→⟦⟧ : ∀ D       → (xs : ⟦ D ⟧ X) → □ (Y ∘ fst)     D   xs → ⟦ D ⟧ Y
+  ■→⟦⟧ : ∀ {R} F r → (xs : ν F X r) → ■ (Y ∘ fst) {R} F r xs → ν F Y r
+  □→⟦⟧ (`I i  ) xs ih   = ih
+  □→⟦⟧ (`ν F r) xs ih = ■→⟦⟧ F r xs ih
+  ] ■→⟦⟧ F r xs ih [  = □→⟦⟧ (% F r) ] xs [ > ih < 
 \end{code}
 
-There are alternative (better) ways to obtain `■→⟦⟧` but this was
-enough to exhibit a diverging behaviour that, thanks to Andreas Abel's
-fix, does not actually appear anymore.
-
-## Issue
+## Example
 
 `N` is the carrier of the terminal coalgebra of the identity functor.
 

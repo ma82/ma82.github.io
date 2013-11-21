@@ -1,4 +1,4 @@
-# A universe of functors closed under identity, fixpoint and ∞
+# A universe of functors closed under fixpoint and ∞
 
 \begin{code}
 module Inf where
@@ -74,9 +74,6 @@ mutual
 
 ⟦_⟧▻ : {I O : Set} → I ▻ O → Pow I → Pow O
 ⟦ F ⟧▻ X o = ⟦ F o ⟧ X
-
-∞map : {X Y : Set} → (X → Y) → ∞ X → ∞ Y
-∞map f x = ♯ f (♭ x)
 
 ⟦_⟧map  : {I : Set}{X Y : Pow I} → ∀ D → X ⇛ Y → ⟦ D ⟧ X → ⟦ D ⟧ Y
 ⟦ `I i     ⟧map f   xs   = f i xs
