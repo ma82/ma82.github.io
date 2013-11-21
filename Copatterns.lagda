@@ -1,9 +1,4 @@
-# Stack overflows with `--copatterns`
-
-The following was tested on Agda's last commit (Tue Nov 19 10:59:34).
-
-The current stable version from Hackage (2.3.2.2) does not accept
-`■→⟦⟧`, however I do not understand the error message.
+# A universe of functors closed under ν using copatterns
 
 \begin{code}
 {-# OPTIONS --copatterns #-}
@@ -15,9 +10,6 @@ open import Data.Product  using    (Σ ; _,_)
 open import Data.Sum as ⊎ using (_⊎_)
                           renaming (inj₁ to inl ; inj₂ to inr)
 open import Data.Unit
-
-Π : ∀ {lA}(A : Set lA){lB} → (A → Set lB) → Set _
-Π A B = (a : A) → B a
 
 Pow : Set → Set₁
 Pow I = I → Set
@@ -52,6 +44,9 @@ _`∘_ : {A B C : Set} → B ▻ C → A ▻ B → A ▻ C
 
 `_[_] : {I J K : Set} → (I ⊎ K ▻ J) → (I ▻ K) → I ▻ J
 ` F [ G ] = F `∘ ⊎.[ `I , G ]
+
+% : {I J : Set} → (I ⊎ J ▻ J) → I ▻ J
+% F = ` F [ `ν F ]
 \end{code}
 
 ## Semantics
@@ -66,7 +61,7 @@ mutual
   record ν {I R}(F : (I ⊎ R) ▻ R)(X : Pow I)(r : R) : Set where
     coinductive
     constructor [_] 
-    field       ]_[ : ⟦ ` F [ `ν F ] r ⟧ X
+    field       ]_[ : ⟦ % F r ⟧ X
 
 ⟦_⟧▻ : {I O : Set} → I ▻ O → Pow I → Pow O
 ⟦ F ⟧▻ X o = ⟦ F o ⟧ X
@@ -78,21 +73,21 @@ open ν
 
 ### Box
 
-We use a nested inductive-coinductive definition.
+We (now) use a coinductive-recursive definition.
 
 \begin{code}
 module Lifting {I}{X : Pow I}(P : Pow/ X) where
 
   mutual
 
-    data □ : (D : De I) → ⟦ D ⟧ X → Set₁ where
-      □I : ∀ {k x}           → P (k , x)                  → □ (`I k)   x
-      □ν : ∀ {R F}{r : R}{x} → ■ (` F [ `ν F ] r) (] x [) → □ (`ν F r) x
+    □ : (D : De I) → ⟦ D ⟧ X → Set
+    □ (`I i)   xs = P (i , xs)
+    □ (`ν F r) xs = ■ F r xs
 
-    record ■ (D : De I)(xs : ⟦ D ⟧ X) : Set₁ where
+    record ■ {R}(F : I ⊎ R ▻ R)(r : R)(xs : ⟦ `ν F r ⟧ X) : Set where
       coinductive
       constructor <_>
-      field       >_< : □ D xs
+      field       >_< : □ (% F r) ] xs [
 
 open Lifting; open ■
 \end{code}
@@ -102,12 +97,11 @@ open Lifting; open ■
 \begin{code}
 module All {I : Set}{X : Pow I}{P : Pow/ X}(m : ∀ x → P x) where
 
-  ◽ : ∀ D xs → □ P D xs
-  ◾ : ∀ D xs → ■ P D xs
-  ◽ (`I i  ) x = □I (m (i , x))
-  ◽ (`ν F r) x = □ν (◾ _ ] x [)
---  ◾ D x        = < ◽ D x >    -- -> red!
-  > ◾ D x    < = ◽ D x
+  ◽ : ∀     D   xs → □ P D xs
+  ◾ : ∀ {R} F r xs → ■ P {R} F r xs
+  ◽ (`I i) xs   = m (i , xs)
+  ◽ (`ν F x) xs = ◾ F x xs
+  > ◾ F r xs <  = ◽ (% F r) ] xs [
 \end{code}
 
 ### Non-dependent predicates lemma
@@ -118,17 +112,20 @@ non-dependent predicates.
 \begin{code}
 module □→⟦⟧ {I : Set}{X Y : Pow I} where
 
-  {-# NO_TERMINATION_CHECK #-}
-  □→⟦⟧ : ∀ D → Σ (⟦ D ⟧ X) (□ (Y ∘ fst) D) → ⟦ D ⟧ Y
-  ■→⟦⟧ : ∀ D → Σ (⟦ D ⟧ X) (■ (Y ∘ fst) D) → ⟦ D ⟧ Y
-  □→⟦⟧ (`I j  ) (xs , □I ih) = ih
-  □→⟦⟧ (`ν F j) (xs , □ν ih) = [ ■→⟦⟧ (` F [ `ν F ] j) (] xs [ , ih) ]
-  ■→⟦⟧ D        (xs ,    ih) = □→⟦⟧ D (xs , > ih <)
+    □→⟦⟧ : ∀ D       → (xs : ⟦ D ⟧ X) → □ (Y ∘ fst)     D   xs → ⟦ D ⟧ Y
+    ■→⟦⟧ : ∀ {R} F r → (xs : ν F X r) → ■ (Y ∘ fst) {R} F r xs → ν F Y r
+    □→⟦⟧ (`I i  ) xs ih   = ih
+    □→⟦⟧ (`ν F r) xs ih = ■→⟦⟧ F r xs ih
+    ] ■→⟦⟧ F r xs ih [  = □→⟦⟧ (% F r) ] xs [ > ih < 
 \end{code}
+
+There are alternative (better) ways to obtain `■→⟦⟧` but this was
+enough to exhibit a diverging behaviour that, thanks to Andreas Abel's
+fix, does not actually appear anymore.
 
 ## Issue
 
-`N` is the terminal coalgebra of the identity functor.
+`N` is the carrier of the terminal coalgebra of the identity functor.
 
 \begin{code}
 NF : ⊤ ▻ ⊤
@@ -146,7 +143,7 @@ n : N
 \end{code}
 
 If we build another `N` in the same way Agda *decides* that it is
-*not* definitionally equal to `n`: as we would expect, `id-nm` does
+*not* definitionally equal to `n`. As we would expect, `id-nm` does
 not typecheck.
 
 \begin{code}
@@ -163,10 +160,10 @@ We can build other elements of `N` by means of `□→⟦⟧` and `◽`, though.
 open All ; open □→⟦⟧
 
 o : N
-o = □→⟦⟧ (NF _) (n , ◽ _ _ n)
+o = □→⟦⟧ (NF _) n (◽ (λ _ → tt) (NF _) n)
 
 p : N
-p = □→⟦⟧ (NF _) (o , ◽ _ _ o)
+p = □→⟦⟧ (NF _) o (◽ (λ _ → tt) (NF _) o)
 \end{code}
 
 Again, neither of them is convertible with `n`.
@@ -179,34 +176,25 @@ Again, neither of them is convertible with `n`.
 -- id-np = id
 \end{code}
 
-However, is `o` convertible with `p`?
+Is `o` convertible with `p`?
 
 \begin{code}
 -- id-op : N ∋ o → N ∋ p
 -- id-op = id
 \end{code}
 
-When Agda tries to typecheck `id-op` on my machine it allocates ~ 2 GB
-of memory and prints *stack overflow* after a while. The interactive
-process does not exit but the file is not loaded.
+No!
 
-More interestingly, this also happens if I leave it commented out,
-load the file and evaluate `o` or `p` using `C-c C-n`.
+If I evaluate `o` or `p` using `C-c C-n` I do not get divergence (anymore).
 
-Finally, this also happens if I `C-c C-a` in the type-level hole
-below.
+If I `C-c C-a` in the type-level hole below I obtain
+
+    Not implemented: The Agda synthesizer (Agsy) does not support
+    copatterns yet
 
 \begin{code}
 -- inferN∋o : N ∋ o → N ∋ {!!}
 -- inferN∋o x = x
 \end{code}
 
-2013 Nov 19, matteo.acerbi@gmail.com
-
-## Updates
-
-With Agda Wed Nov 20 17:09:04 CET 2013 `□→⟦⟧` does not pass
-termination checking anymore, and to generate this HTML file anyway I
-had to disable it for that definition.
-
-2013 Nov 20, matteo.acerbi@gmail.com
+2013 Nov 21, matteo.acerbi@gmail.com
