@@ -175,7 +175,7 @@ $\begin{align}
 $
 
 We also notice that $$F \bigstar \bot = \mu (F + K_\bot) \cong \mu
-F$$ (TODO)
+F$$
 
 Finally, leveraging cocontinuity, it is easy to prove that initiality
 of $F \bigstar X$ corresponds to the uniqueness of $\cata{[\alpha \,,
@@ -358,8 +358,6 @@ conclude that $\cata{\alpha ⊡ \rho} = \cata{\alpha} \cdot
 
 The appeal to induction can be justified using the techniques from
 @DBLP:journals/corr/abs-1206-0357: we give a sketch of how to proceed.
-
-TODO
 
 (TODO. Set-valued predicate over B objects?
        It would be nice... Predicativity issues?)
