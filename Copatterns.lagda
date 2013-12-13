@@ -1,5 +1,7 @@
 # A universe of functors closed under ν using copatterns
 
+An approximation of Ernesto.
+
 \begin{code}
 {-# OPTIONS --copatterns #-}
 module Copatterns where
