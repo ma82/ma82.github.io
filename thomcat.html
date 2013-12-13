@@ -1,1 +1,264 @@
-/home/matteo/src/private/inactive/thom/thomcat.html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="thom.css" type="text/css" />
+  <script src="mathjax-MathJax-24a378e/MathJax.js?config=default" type="text/javascript"></script>
+</head>
+<body>
+<!-- (progn (setq compilation-window-height 0)
+            (setq compilation-scroll-output nil)
+            (defun make-thom () (if (equal (buffer-name) "thomcat.md")
+                                            (compile "runhaskell Make.hs")))
+            (add-hook 'after-save-hook 'make-thom))
+     (remove-hook 'after-save-hook 'make-thom)
+-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js","fp.js"],
+    //                         ^^^^^load fp.js
+    jax: ["input/TeX","output/HTML-CSS"],
+    "HTML-CSS": {
+      styles: {".MathJax_Preview": {visibility: "hidden"}}
+    },
+    tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]},
+    TeX: {extensions: ["xypic.js", "AMSmath.js","AMSsymbols.js"]}
+    //                  ^^^^^^^^load xypic.js
+  });
+</script>
+
+<p><a href="http://creativecommons.org/licenses/by-sa/3.0/"><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;"> © </span> 2013 Matteo Acerbi</a></p>
+<h1 id="fusion-law-for-tree-homomorphisms">Fusion law for tree homomorphisms</h1>
+<h2 id="abstract">Abstract</h2>
+<p>These notes describe a proof to a <em>fusion</em> law for <em>tree homomorphisms</em> (<span class="citation">Bahr and Hvitved (2011)</span>) in terms of elementary category theory.</p>
+<p>We discuss how it is possible to instantiate the abstract reasoning to different more concrete settings.</p>
+<p>As an example application we show a simple equational method which allows to build modular compilers (<span class="citation">Day and Hutton (2012)</span>) with modular proofs of correctness, an approach we put into practice in the dependently-typed language Agda.</p>
+<h2 id="introduction">Introduction</h2>
+<p><span class="math">\(\newcommand{\B}{\mathbf{B}}  \newcommand{\P}{\mathbf{P}}  \newcommand{\nt}{\Rightarrow}  \newcommand{\id}{\text{id}}  \newcommand{\indfun}{\leadsto}  \newcommand{\cata}[1]{(\!∣ #1 ∣\!)  \newcommand{\roll}{\text{roll}}  \newcommand{\var}{\text{var}}}  \newcommand{\eta}{\text{unit}}  \newcommand{\join}{\text{join}}  \newcommand{\sem}[1]{[\!∣ #1 ∣\!]}  \newcommand{\catath}[1]{⟨\!∣ #1 ∣\!⟩}  \newcommand{\Set}{\mathbf{Set}} \)</span>We need a cartesian closed category <span class="math">\(\B\)</span> with an initial object <span class="math">\(\bot\)</span>.</p>
+<p>TODO. Or a comprehension category with unit? See the end.</p>
+<p>If <span class="math">\(1 : \B \to \B\)</span> is the identity functor and <span class="math">\(K_X : \B \to \B\)</span> is the constant functor to the object <span class="math">\(X\)</span>, <span class="math">\(! : K_\bot \nt 1\)</span> is the unique natural transformation witnessing <span class="math">\(\bot\)</span>’s initiality.</p>
+<p><span class="math">\(\B\)</span> must have finite coproducts. Given objects <span class="math">\(X , Y : \B\)</span>, there is an object <span class="math">\(X + Y : \B\)</span> and morphisms</p>
+<p><span class="math">\[\begin{align}
+inl_{X,Y} : X \to X + Y\\
+inr_{X,Y} : Y \to X + Y
+\end{align}\]</span></p>
+<p>such that or every <span class="math">\(Z\)</span>, <span class="math">\(f\)</span> and <span class="math">\(g\)</span> as in the following diagram there exists a <em>unique</em> morphism <span class="math">\([f \,, g] : X + Y \to Z\)</span> that makes the following diagram commute.</p>
+<p><span class="math">\[
+\xymatrix{
+&amp; Z &amp; \\
+X \ar[ru]^{f} \ar[r]_{inl_{X,Y}} &amp; X + Y \ar@{.&gt;}[u]|{[f \,, g]} &amp; Y \ar[l]^{inr_{X,Y}} \ar[lu]_{g}
+}
+\]</span></p>
+<p>For any endofunctor <span class="math">\(F : \B \to \B\)</span>, a pair <span class="math">\((X \in B , \alpha : F X \to X)\)</span> is called an <span class="math">\(F\)</span>-algebra. A morphism <span class="math">\(f : X \to Y\)</span> such that the diagram below commutes is an <em><span class="math">\(F\)</span>-algebra homomorphism</em> from <span class="math">\(\alpha\)</span> to <span class="math">\(\beta\)</span>.</p>
+<p><span class="math">\[
+\xymatrix{F X \ar[d]^{\alpha} \ar[r]^{F k} &amp; F Y \ar[d]^{\beta} \\
+        X \ar[r]^{f}                   &amp; Y }
+\]</span></p>
+<p>For any <span class="math">\(F\)</span>, <span class="math">\(F\)</span>-algebras and <span class="math">\(F\)</span>-algebra homomorphisms form a category <span class="math">\(Alg_F\)</span>.</p>
+<p>We use the notation <span class="math">\(F : \B \indfun \B\)</span> for cocontinuous (endo)functors <span class="math">\(F\)</span> over <span class="math">\(\B\)</span>. As proved in TODO, all cocontinuous functors admit an initial algebra, i.e. for any <span class="math">\(F : \B \indfun \B\)</span> there exist an object <span class="math">\(\mu F : \B\)</span> and a morphism <span class="math">\(in_F : F (\mu F) \to \mu F\)</span> which form an initial object of <span class="math">\(Alg_F\)</span>.</p>
+<p>By Lambek’s lemma, the initial algebra <span class="math">\(in_F : F (\mu F) \to \mu F\)</span> is an isomorphism: we call <span class="math">\(out_F\)</span> its inverse. For any inductive functor <span class="math">\(F\)</span> we call <em>catamorphism</em> the <em>unique</em> algebra homomorphism from <span class="math">\(in_F\)</span> to a given algebra <span class="math">\(\alpha : F Y \to Y\)</span>, for which we adopt the notation <span class="math">\(\cata{\alpha}_F\)</span> (<span class="citation">Meijer, Fokkinga, and Paterson (1991)</span>).</p>
+<p>Initiality of <span class="math">\(in_F\)</span> can be expressed diagrammatically:</p>
+<p><span class="math">\[
+\xymatrix{F (\mu F) \ar[d]^{in} \ar[r]^{F k} &amp; F Y \ar[d]^{\alpha} \\
+         \mu F  \ar@{.&gt;}[r]^{\cata{\alpha}}   &amp; Y }
+\]</span></p>
+<p>We consider isomorphic objects, morphisms and functors <em>equal</em> (TODO), and we drop subscripts when inferable from the context.</p>
+<h2 id="free-monad-construction">Free monad construction</h2>
+<p>For any cocontinuous functor <span class="math">\(F : \B \indfun \B\)</span> and object <span class="math">\(X : \B\)</span>, let us consider the assignment</p>
+<p><span class="math">\[F \star X = F + K_X\]</span></p>
+<p><span class="math">\(F \star X\)</span> is an cocontinous functor as well (TODO). We define a similar notation for (the carrier of) its initial algebra:</p>
+<p><span class="math">\[F \bigstar X = \mu \, (F \star X)\]</span></p>
+<p>We will refer to the following <em>constructors</em>.</p>
+<p><span class="math">\(\begin{align} \roll_{F,X} &amp; : F (F \bigstar X) \to F \bigstar X\\ \roll_{F,X} &amp; = in \cdot inl \\ \var_{F,X} &amp; : X \to F \bigstar X\\ \var_{F,X} &amp; = in \cdot inr \end{align}\)</span></p>
+<p>Also <span class="math">\(F \bigstar\)</span> is a cocontinuous functor: we simply show a valid definition for its action on morphisms.</p>
+<p><span class="math">\(\begin{align} F \bigstar \, \_ &amp; : (X \to Y) \to (F X \to F Y)\\ F \bigstar \, f &amp; = \cata{[ roll \,, var \cdot f ]} \end{align}\)</span></p>
+<p><span class="math">\(F \bigstar\)</span> is a monad as well, known as the <em>free monad</em> over <span class="math">\(F\)</span> (<span class="citation">Meijer, Fokkinga, and Paterson (1991)</span>, TODO explain why free).</p>
+<p>We will make use of the following definitions for monadic <em>unit</em> and <em>multiplication</em>.</p>
+<p><span class="math">\(\begin{align} \eta_{F} &amp; : 1 \nt F \bigstar\\ \eta_{F,X} &amp; = var_{F,X} \end{align} \)</span></p>
+<p><span class="math">\(\begin{align} \join_{F} &amp; : F \bigstar \cdot F \bigstar \nt F \bigstar\\ \join_{F,X} &amp; = \cata{[roll_{F,X} \,, id_{F\bigstar X}]} \end{align} \)</span></p>
+<p>We also notice that <span class="math">\[F \bigstar \bot = \mu (F + K_\bot) \cong \mu
+F\]</span> (TODO)</p>
+<p>Finally, leveraging cocontinuity, it is easy to prove that initiality of <span class="math">\(F \bigstar X\)</span> corresponds to the uniqueness of <span class="math">\(\cata{[\alpha \,, \xi]}\)</span> in the following commutative diagram:</p>
+<p><span class="math">\[
+\xymatrix{
+F (F \bigstar X) \ar[d]_{\roll_{F,X}} \ar[r]^{F \cata{[ \alpha \,, \xi ]}} &amp; F Y \ar[d]^{\alpha} \\
+F \bigstar X \ar@{.&gt;}[r]^{\cata{[\alpha \,, \xi]}} &amp; Y \\
+X \ar[u]^{\var_{F,X}} \ar[ur]_{\xi}}
+\]</span></p>
+<h2 id="tree-homomorphisms">Tree homomorphisms</h2>
+<p>For cocontinuous functors <span class="math">\(F\)</span> and <span class="math">\(G\)</span>, we call a natural transformation</p>
+<p><span class="math">\[\rho : F \nt G \bigstar\]</span></p>
+<p>a <em>tree homomorphism</em> (<span class="citation">Bahr and Hvitved (2011)</span>).</p>
+<p>For any <span class="math">\(F\)</span> and <span class="math">\(G\)</span> the following map is defined: each tree homomorphism gives rise to a polymorphic <span class="math">\(F\)</span>-algebra.</p>
+<p><span class="math">\(\begin{align} \sem{\_} &amp; : (F \nt G \bigstar) \to (F \cdot (G \bigstar) \nt G \bigstar) \\ \sem{\rho} &amp; = [ \join \cdot \rho \,, \eta ] \end{align}\)</span></p>
+<!--
+(TODO. If I wanted to say that this is a morphism, cartesian
+closedness would not be enough!  In which categories every natural
+transformations is a morphism, not a family of morphisms? I should
+look into categorical semantics for polymorphic type theory)
+-->
+
+<p>Leveraging <span class="math">\(F \bigstar \bot \cong \mu F\)</span>, we obtain a morphism in <span class="math">\(\B\)</span> by taking the catamorphism of <span class="math">\(\sem{\rho}\)</span> at <span class="math">\(\bot\)</span>.</p>
+<p><span class="math">\(\begin{align} \catath{\_}_{F,G} &amp; : (F \nt G \bigstar) \to (\mu F \to \mu G)\\ \catath{ \rho }_{F,G} &amp; = \cata{\sem{\rho}_\bot} = \cata{[ \join \cdot \rho \,, \eta ]_\bot } \end{align} \)</span></p>
+<p>The latter definition can be read as a semantic interpretation of any tree homomorphism as a tree transformation, where by <em>tree</em> we intend inductive <em>datatype</em>, or categorically, the carrier of an initial algebra.</p>
+<h2 id="fusion-law">Fusion law</h2>
+<h3 id="statement">Statement</h3>
+<p>In the cited paper, Bahr and Hvitved describe the following binary operator, taking in input both a <span class="math">\(G\)</span>-algebra and a tree homomorphism from <span class="math">\(F\)</span> to <span class="math">\(G\)</span>, and returning an <span class="math">\(F\)</span>-algebra.</p>
+<p><span class="math">\(\begin{align} \_⊡\_ &amp; : (G Y \to Y) → (F \nt G \bigstar) → (F Y \to Y)\\ \alpha ⊡ \rho &amp; = \cata{[ \alpha \,, ! ]} \cdot \rho \cdot \text{out} \end{align}\)</span></p>
+<p>In the setting of the Haskell programming language, the authors state the validity of the following <em>fusion</em> law.</p>
+<p><span class="math">\[\frac {(G : \B \indfun \B)
+     (\alpha : Alg_G)
+     (\rho : F \nt G \bigstar)}
+    {\cata{\alpha} \cdot \catath{\rho} = \cata{\alpha ⊡ \rho}} \]</span></p>
+<h3 id="proof">Proof</h3>
+<p>The cited paper does not provide a proof: we try to construct one here, in a slightly more abstract setting. We will later discuss how it relates to the original setting.</p>
+<p>For any <span class="math">\(\rho\)</span>, we start by considering the commuting diagram given by initiality.</p>
+<p><span class="math">\[
+\xymatrix {
+  F (\mu F) = F (F \bigstar \bot) \ar[dd]_{\text{in}_F = \roll_{F,\bot}} \ar[r]^{F \catath{\rho}}
+&amp; F (\mu F) = F (G \bigstar \bot) \ar[d]^{\rho_{G \bigstar \bot}} \\
+&amp; G \bigstar \mu G = G \bigstar (G \bigstar \bot) \ar[d]^{\join_{G,\bot}}   \\          
+  \mu F = F \bigstar \bot \ar[r]^{\catath{\rho} = \cata{(\join_{G,\bot} \cdot \rho_{G \bigstar \bot}) \,,\, \var_{G,\bot}}}
+&amp; \mu G = G \bigstar \bot \\
+\bot \ar[u]^{\var_{F,\bot}} \ar[ur]_{\var_{G,\bot}}}
+\]</span></p>
+<p>Consider now an algebra <span class="math">\(\alpha : G T \to T\)</span>.</p>
+<p>We add to the right of the diagram the arrow <span class="math">\(\cata{\alpha} : \mu G \to T\)</span> (isomorphic to <span class="math">\(\cata{[ \alpha , ! ]} : G \bigstar \bot \to T\)</span>), which consequently allows to add several other related morphisms that “typecheck”.</p>
+<p><span class="math">\[
+\xymatrix{
+    F (F \bigstar \bot) \ar[dd]_{\text{in}_F = \roll_{F,\bot}} \ar[r]^{F \catath{\rho}} \ar@{}[ddr]|{(a)} &amp; F (G \bigstar \bot) \ar[d]^{\rho_{G \bigstar \bot}}  \ar[r]^{F \cata{\alpha}} \ar@{}[dr]|{(b)} &amp; F T \ar[d]^{\rho_{T}} \\
+                                                                                                      &amp; G \bigstar (G \bigstar \bot) \ar[d]^{\join_{G,\bot}} \ar[r]^{G \bigstar \cata{\alpha}} \ar@{}[dr]|{(c)} &amp; G \bigstar T \ar[d]^{\cata{[\alpha , id]}} \\
+F \bigstar \bot \ar[r]^{\catath{\rho}}                                                                 &amp; G \bigstar \bot \ar[r]^{\cata{\alpha} = \cata{[\alpha , !]}}                                                                 &amp; T \\
+                                                                                                      &amp; \bot \ar[lu]^{var_F} \ar[u]_{var_G} \ar[ur]_{!_T}
+}
+\]</span></p>
+<p>Notice that:</p>
+<ul>
+<li><p>as said above, square (a) commutes by <em>initiality</em> for free monads;</p></li>
+<li><p>square (b) commutes by <em>naturality</em> of <span class="math">\(\rho\)</span>;</p></li>
+<li><p>the triangles at the bottom commute by <em>initiality</em> of <span class="math">\(\bot\)</span>.</p></li>
+</ul>
+<p>We now want to prove that square (c) is commutative as well, i.e.:</p>
+<p><span class="math">\[\cata{[ \alpha , \id ]}_{G\star T} \cdot G \bigstar \cata{[ \alpha \,, ! ]}_{G\star \bot} =
+\cata{[ \alpha , ! ]}_{G\star \bot} \cdot \join_{G,\bot}\]</span></p>
+<p>This property can be proved by <em>induction</em>.</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(\roll\)</span> case</li>
+</ol>
+<p><span class="math">\[\begin{align}
+&amp; \cata{[ \alpha , \id ]} \cdot G \bigstar \cata{[ \alpha \,, ! ]} \cdot \roll \\
+\text{{definition of fmap $= G \bigstar$}}
+&amp; = \cata{[ \alpha , \id ]} \cdot \cata{[ \roll \,, \var \cdot \cata{[ \alpha \,, ! ]} ]} \cdot \roll \\
+\text{{definition of $\cata{\_}$}}
+&amp; = \cata{[ \alpha , \id ]} \cdot \roll \cdot G\, \cata{[ \roll \,, \var \cdot \cata{[ \alpha \,, ! ]} ]} \\
+\text{{definition of $\cata{\_}$}}
+&amp; = \alpha \cdot G\, \cata{[ \alpha , \id ]} \cdot G\, \cata{[\roll \,, \var \cdot \cata{[ \alpha \,, ! ]} ]} \\
+\text{{$G (f \cdot g) = G f \cdot G g$}}
+&amp; = \alpha \cdot G\, (\cata{[ \alpha , \id ]} \cdot \cata{[\roll \,, \var \cdot \cata{[\alpha \,, ! ]}]}) \\
+\text{{definition of fmap $= G \bigstar$}}
+&amp; = \alpha \cdot G\, (\cata{[ \alpha , \id ]} \cdot G \bigstar \cata{[ \alpha \,, ! ]}) \\
+\{\textbf{induction hypothesis}\}
+&amp; = \alpha \cdot G\, (\cata{[ \alpha \,, ! ]} \cdot \join) \\ 
+\text{{$G (f \cdot g) = G f \cdot G g$}}
+&amp; = \alpha \cdot G\, \cata{[ \alpha \,, ! ]} \cdot G\, \join \\ 
+\text{{definition of $\cata{\_}$}}
+&amp; = \cata{[ \alpha \,, ! ]} \cdot \roll \cdot G\, \join \\
+\text{{definition of join}}
+&amp; = \cata{[ \alpha \,, ! ]} \cdot \roll \cdot G\, (\!∣\roll \,, \id ∣\!) \\
+\text{{definition of $\cata{\_}$}}
+&amp; = \cata{[ \alpha \,, ! ]} \cdot \cata{[\roll \,, \id]} \cdot \roll \\
+\text{{definition of join}}
+&amp; = \cata{[ \alpha \,, ! ]} \cdot \join \cdot \roll
+\end{align}\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><span class="math">\(\var\)</span> case</li>
+</ol>
+<p><span class="math">\[\begin{align}
+&amp;   \cata{[ \alpha , \id ]} \cdot G \bigstar \cata{[ \alpha \,, ! ]} \cdot \var \\
+\text{{definition of fmap and $\cata{\_}$}}
+&amp; = \cata{[ \alpha , \id ]} \cdot \var \cdot \cata{[ \alpha , ! ]} \\
+\text{{definition of $\cata{\_}$}}
+&amp; = \cata{[ \alpha \,, ! ]} \\
+\text{{definition of $\cata{\_}$}}
+&amp; = \cata{[ \alpha \,, ! ]} \cdot \cata{[ \roll \,, \id ]} \cdot \var \\
+\text{{definition of join}}
+&amp; = \cata{[ \alpha \,, ! ]} \cdot \join \cdot \var
+\end{align}\]</span></p>
+<p>We conclude that also (c) is commutative, hence the whole diagram commutes.</p>
+<p>At the right edge of the upper part of the diagram one has the <span class="math">\(F\)</span>-algebra <span class="math">\((\!∣ \alpha , id ∣\!) \cdot \rho_T : F T \to T\)</span>. This is exactly how <span class="math">\(\alpha ⊡ \rho\)</span> is defined.</p>
+<p>The <em>initiality</em> property for free monads given above allows us to conclude that <span class="math">\(\cata{\alpha ⊡ \rho} = \cata{\alpha} \cdot \catath{\rho}\)</span>.</p>
+<h3 id="justification-of-inductive-reasoning">Justification of inductive reasoning</h3>
+<p>The appeal to induction can be justified using the techniques from <span class="citation">Ghani, Johann, and Fumex (2012)</span>: we give a sketch of how to proceed.</p>
+<p>TODO</p>
+<!--
+(TODO. Set-valued predicate over B objects?
+       It would be nice... Predicativity issues?)
+
+We need to add to the requirements the existence of a category $\P$ of
+predicates over objects of $\B$. The objects of $\P$ are pairs $(X :
+\B \,, P : X \to \Set)$ of an object of $\B$ and a map from that
+object to $\Set$. The morphisms of $\P$ are the predicate morphisms as
+described in Ghani et al.'s paper.
+
+$\P$ must contain all the identity predicates: indeed for every object
+$X$ one has $((X \times X) \,, \lambda (x_1 , x_2). x_1 = x_2) : \P$.
+
+TODO. My wish here was to generalise part 3 of the paper (Induction
+Rules for Predicates over Set) to set-valued predicates over any base
+category, so that I don't have to further specify my $\B$. Does that
+makes any sense?
+
+More concrete proofs
+--------------------
+
+### Constructive type theory
+
+* Strict positivity => Polynomials/containers
+* Indexed morphisms
+* Proofs: naturality is not provable, we restrict to tree
+  homomorphisms which are natural using a sigma type.
+* Example: Agda
+
+### System F$\omega$
+
+* Proofs in a parametric setting.
+* Model must be parametric (@DBLP:conf/csl/Atkey12), as parametricity
+  implies naturality (TODO (again)).
+
+### Haskell
+
+* Parametric model?! Depends.
+* Turing-completeness => category $\omega-CPO_\bot$ :
+  $\omega$-complete partial orders with a bottom element and *strict*
+  continuous functions between them.
+  
+    * Is this fine as a $\B$? TODO. Check.
+    * Fusion law proof does not apply to lazy algebras and tree homomorphisms.
+
+Example applications
+--------------------
+
+### Coproduct of tree homomorphisms
+
+### Modular certified compilers
+
+Are *smart algebras* equivalent to tree homomorphisms?
+------------------------------------------------------
+
+Conclusions
+-----------
+
+-->
+
+<h2 id="references">References</h2>
+<p>Bahr, Patrick, and Tom Hvitved. 2011. “Compositional data types.” In <em>Proceedings of the seventh ACM SIGPLAN workshop on Generic programming</em>, 83–94. WGP ’11. New York, NY, USA: ACM. <a href="http://doi.acm.org/10.1145/2036918.2036930" title="http://doi.acm.org/10.1145/2036918.2036930">http://doi.acm.org/10.1145/2036918.2036930</a>.</p>
+<p>Day, Laurence E., and Graham Hutton. 2012. “Towards modular compilers for effects.” In <em>Proceedings of the 12th international conference on Trends in Functional Programming</em>, 49–64. TFP’11. Berlin, Heidelberg: Springer-Verlag. <a href="http://dx.doi.org/10.1007/978-3-642-32037-8_4" title="http://dx.doi.org/10.1007/978-3-642-32037-8_4">http://dx.doi.org/10.1007/978-3-642-32037-8_4</a>.</p>
+<p>Ghani, Neil, Patricia Johann, and Clément Fumex. 2012. “Generic Fibrational Induction.” <em>Logical Methods in Computer Science</em> 8 (2).</p>
+<p>Meijer, Erik, Maarten Fokkinga, and Ross Paterson. 1991. “Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire.” In , 124–144. Springer-Verlag.</p>
+</body>
+</html>
