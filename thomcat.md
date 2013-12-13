@@ -222,8 +222,8 @@ $\begin{align}
 \end{align}
 $
 
-The latter definition can be read as a semantic interpretation of any
-tree homomorphism as a tree transformation, where by *tree* we intend
+The latter definition can be read as the interpretation of a tree
+homomorphism as a tree transformation, where by *tree* we intend
 inductive *datatype*, or categorically, the carrier of an initial
 algebra.
 
@@ -233,7 +233,7 @@ Fusion law
 ### Statement
 
 In the cited paper, Bahr and Hvitved describe the following binary
-operator, taking in input both a $G$-algebra and a tree homomorphism
+operator, taking as input both a $G$-algebra and a tree homomorphism
 from $F$ to $G$, and returning an $F$-algebra.
 
 $\begin{align}
@@ -252,8 +252,9 @@ $$\frac {(G : \B \indfun \B)
 ### Proof
 
 The cited paper does not provide a proof: we try to construct one
-here, in a slightly more abstract setting. We will later discuss how
-it relates to the original context.
+here, in a slightly more abstract setting.
+
+<!-- We will later discuss how it relates to the original context. -->
 
 For any $\rho$, we start by considering the commuting diagram given by
 initiality.
@@ -374,7 +375,7 @@ $X$ one has $((X \times X) \,, \lambda (x_1 , x_2). x_1 = x_2) : \P$.
 TODO. My wish here was to generalise part 3 of the paper (Induction
 Rules for Predicates over Set) to set-valued predicates over any base
 category, so that I don't have to further specify my $\B$. Does that
-makes any sense?
+make any sense?
 
 More concrete proofs
 --------------------

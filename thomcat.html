@@ -118,10 +118,10 @@ look into categorical semantics for polymorphic type theory)
 
 <p>Leveraging <span class="math">\(F \bigstar \bot \cong \mu F\)</span>, we obtain a morphism in <span class="math">\(\B\)</span> by taking the catamorphism of <span class="math">\(\sem{\rho}\)</span> at <span class="math">\(\bot\)</span>.</p>
 <p><span class="math">\(\begin{align} \catath{\_}_{F,G} &amp; : (F \nt G \bigstar) \to (\mu F \to \mu G)\\ \catath{ \rho }_{F,G} &amp; = \cata{\sem{\rho}_\bot} = \cata{[ \join \cdot \rho \,, \eta ]_\bot } \end{align} \)</span></p>
-<p>The latter definition can be read as a semantic interpretation of any tree homomorphism as a tree transformation, where by <em>tree</em> we intend inductive <em>datatype</em>, or categorically, the carrier of an initial algebra.</p>
+<p>The latter definition can be read as the interpretation of a tree homomorphism as a tree transformation, where by <em>tree</em> we intend inductive <em>datatype</em>, or categorically, the carrier of an initial algebra.</p>
 <h2 id="fusion-law">Fusion law</h2>
 <h3 id="statement">Statement</h3>
-<p>In the cited paper, Bahr and Hvitved describe the following binary operator, taking in input both a <span class="math">\(G\)</span>-algebra and a tree homomorphism from <span class="math">\(F\)</span> to <span class="math">\(G\)</span>, and returning an <span class="math">\(F\)</span>-algebra.</p>
+<p>In the cited paper, Bahr and Hvitved describe the following binary operator, taking as input both a <span class="math">\(G\)</span>-algebra and a tree homomorphism from <span class="math">\(F\)</span> to <span class="math">\(G\)</span>, and returning an <span class="math">\(F\)</span>-algebra.</p>
 <p><span class="math">\(\begin{align} \_⊡\_ &amp; : (G Y \to Y) → (F \nt G \bigstar) → (F Y \to Y)\\ \alpha ⊡ \rho &amp; = \cata{[ \alpha \,, ! ]} \cdot \rho \cdot \text{out} \end{align}\)</span></p>
 <p>In the context of the Haskell programming language, the authors state the validity of the following <em>fusion</em> law.</p>
 <p><span class="math">\[\frac {(G : \B \indfun \B)
@@ -129,7 +129,9 @@ look into categorical semantics for polymorphic type theory)
      (\rho : F \nt G \bigstar)}
     {\cata{\alpha} \cdot \catath{\rho} = \cata{\alpha ⊡ \rho}} \]</span></p>
 <h3 id="proof">Proof</h3>
-<p>The cited paper does not provide a proof: we try to construct one here, in a slightly more abstract setting. We will later discuss how it relates to the original context.</p>
+<p>The cited paper does not provide a proof: we try to construct one here, in a slightly more abstract setting.</p>
+<!-- We will later discuss how it relates to the original context. -->
+
 <p>For any <span class="math">\(\rho\)</span>, we start by considering the commuting diagram given by initiality.</p>
 <p><span class="math">\[
 \xymatrix {
@@ -228,7 +230,7 @@ $X$ one has $((X \times X) \,, \lambda (x_1 , x_2). x_1 = x_2) : \P$.
 TODO. My wish here was to generalise part 3 of the paper (Induction
 Rules for Predicates over Set) to set-valued predicates over any base
 category, so that I don't have to further specify my $\B$. Does that
-makes any sense?
+make any sense?
 
 More concrete proofs
 --------------------
