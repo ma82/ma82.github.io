@@ -36,11 +36,20 @@
 <h1 id="fusion-law-for-tree-homomorphisms">Fusion law for tree homomorphisms</h1>
 <h2 id="abstract">Abstract</h2>
 <p>These notes describe a proof to a <em>fusion</em> law for <em>tree homomorphisms</em> (<span class="citation">Bahr and Hvitved (2011)</span>) in terms of elementary category theory.</p>
-<p>We discuss how it is possible to instantiate the abstract reasoning to different more concrete settings.</p>
-<p>As an example application we show a simple equational method which allows to build modular compilers (<span class="citation">Day and Hutton (2012)</span>) with modular proofs of correctness, an approach we put into practice in the dependently-typed language Agda.</p>
+<!--
+We discuss how it is possible to instantiate the abstract reasoning to
+different more concrete settings.
+
+As an example application we show a simple equational method which
+allows to build modular compilers (@Day:2011:TMC:2362963.2362969) with
+modular proofs of correctness, an approach we put into practice in the
+dependently-typed language Agda.
+-->
+
 <h2 id="introduction">Introduction</h2>
 <p><span class="math">\(\newcommand{\B}{\mathbf{B}}  \newcommand{\P}{\mathbf{P}}  \newcommand{\nt}{\Rightarrow}  \newcommand{\id}{\text{id}}  \newcommand{\indfun}{\leadsto}  \newcommand{\cata}[1]{(\!∣ #1 ∣\!)  \newcommand{\roll}{\text{roll}}  \newcommand{\var}{\text{var}}}  \newcommand{\eta}{\text{unit}}  \newcommand{\join}{\text{join}}  \newcommand{\sem}[1]{[\!∣ #1 ∣\!]}  \newcommand{\catath}[1]{⟨\!∣ #1 ∣\!⟩}  \newcommand{\Set}{\mathbf{Set}} \)</span>We need a cartesian closed category <span class="math">\(\B\)</span> with an initial object <span class="math">\(\bot\)</span>.</p>
-<p>TODO. Or a comprehension category with unit? See the end.</p>
+<!-- TODO. Or a comprehension category with unit? See the end. -->
+
 <p>If <span class="math">\(1 : \B \to \B\)</span> is the identity functor and <span class="math">\(K_X : \B \to \B\)</span> is the constant functor to the object <span class="math">\(X\)</span>, <span class="math">\(! : K_\bot \nt 1\)</span> is the unique natural transformation witnessing <span class="math">\(\bot\)</span>’s initiality.</p>
 <p><span class="math">\(\B\)</span> must have finite coproducts. Given objects <span class="math">\(X , Y : \B\)</span>, there is an object <span class="math">\(X + Y : \B\)</span> and morphisms</p>
 <p><span class="math">\[\begin{align}
@@ -60,24 +69,28 @@ X \ar[ru]^{f} \ar[r]_{inl_{X,Y}} &amp; X + Y \ar@{.&gt;}[u]|{[f \,, g]} &amp; Y 
         X \ar[r]^{f}                   &amp; Y }
 \]</span></p>
 <p>For any <span class="math">\(F\)</span>, <span class="math">\(F\)</span>-algebras and <span class="math">\(F\)</span>-algebra homomorphisms form a category <span class="math">\(Alg_F\)</span>.</p>
-<p>We use the notation <span class="math">\(F : \B \indfun \B\)</span> for cocontinuous (endo)functors <span class="math">\(F\)</span> over <span class="math">\(\B\)</span>. As proved in TODO, all cocontinuous functors admit an initial algebra, i.e. for any <span class="math">\(F : \B \indfun \B\)</span> there exist an object <span class="math">\(\mu F : \B\)</span> and a morphism <span class="math">\(in_F : F (\mu F) \to \mu F\)</span> which form an initial object of <span class="math">\(Alg_F\)</span>.</p>
+<p>We use the notation <span class="math">\(F : \B \indfun \B\)</span> for <span class="math">\(\omega\)</span>-cocontinuous (endo)functors <span class="math">\(F\)</span> over <span class="math">\(\B\)</span>. A standard result is that all <span class="math">\(\omega\)</span>-cocontinuous functors admit an initial algebra, i.e. for any <span class="math">\(F : \B \indfun \B\)</span> there exist an object <span class="math">\(\mu F : \B\)</span> and a morphism <span class="math">\(in_F : F (\mu F) \to \mu F\)</span> which form an initial object of <span class="math">\(Alg_F\)</span>.</p>
 <p>By Lambek’s lemma, the initial algebra <span class="math">\(in_F : F (\mu F) \to \mu F\)</span> is an isomorphism: we call <span class="math">\(out_F\)</span> its inverse. For any inductive functor <span class="math">\(F\)</span> we call <em>catamorphism</em> the <em>unique</em> algebra homomorphism from <span class="math">\(in_F\)</span> to a given algebra <span class="math">\(\alpha : F Y \to Y\)</span>, for which we adopt the notation <span class="math">\(\cata{\alpha}_F\)</span> (<span class="citation">Meijer, Fokkinga, and Paterson (1991)</span>).</p>
 <p>Initiality of <span class="math">\(in_F\)</span> can be expressed diagrammatically:</p>
 <p><span class="math">\[
 \xymatrix{F (\mu F) \ar[d]^{in} \ar[r]^{F k} &amp; F Y \ar[d]^{\alpha} \\
          \mu F  \ar@{.&gt;}[r]^{\cata{\alpha}}   &amp; Y }
 \]</span></p>
-<p>We consider isomorphic objects, morphisms and functors <em>equal</em> (TODO), and we drop subscripts when inferable from the context.</p>
+<p>We consider isomorphic objects, morphisms and functors <em>equal</em>, and we drop subscripts when inferable from the context.</p>
 <h2 id="free-monad-construction">Free monad construction</h2>
-<p>For any cocontinuous functor <span class="math">\(F : \B \indfun \B\)</span> and object <span class="math">\(X : \B\)</span>, let us consider the assignment</p>
+<p>For any <span class="math">\(\omega\)</span>-cocontinuous functor <span class="math">\(F : \B \indfun \B\)</span> and object <span class="math">\(X : \B\)</span>, let us consider the assignment</p>
 <p><span class="math">\[F \star X = F + K_X\]</span></p>
-<p><span class="math">\(F \star X\)</span> is an cocontinous functor as well (TODO). We define a similar notation for (the carrier of) its initial algebra:</p>
+<p><span class="math">\(F \star X\)</span> is an cocontinous functor as well. We define a similar notation for (the carrier of) its initial algebra:</p>
 <p><span class="math">\[F \bigstar X = \mu \, (F \star X)\]</span></p>
 <p>We will refer to the following <em>constructors</em>.</p>
 <p><span class="math">\(\begin{align} \roll_{F,X} &amp; : F (F \bigstar X) \to F \bigstar X\\ \roll_{F,X} &amp; = in \cdot inl \\ \var_{F,X} &amp; : X \to F \bigstar X\\ \var_{F,X} &amp; = in \cdot inr \end{align}\)</span></p>
-<p>Also <span class="math">\(F \bigstar\)</span> is a cocontinuous functor: we simply show a valid definition for its action on morphisms.</p>
+<p>Also <span class="math">\(F \bigstar\)</span> is a (<span class="math">\(\omega\)</span>-cocontinuous) functor: we simply show a valid definition for its action on morphisms.</p>
 <p><span class="math">\(\begin{align} F \bigstar \, \_ &amp; : (X \to Y) \to (F X \to F Y)\\ F \bigstar \, f &amp; = \cata{[ roll \,, var \cdot f ]} \end{align}\)</span></p>
-<p><span class="math">\(F \bigstar\)</span> is a monad as well, known as the <em>free monad</em> over <span class="math">\(F\)</span> (<span class="citation">Meijer, Fokkinga, and Paterson (1991)</span>, TODO explain why free).</p>
+<p><span class="math">\(F \bigstar\)</span> is a monad as well, known as the <em>free monad</em> over <span class="math">\(F\)</span> (<span class="citation">Meijer, Fokkinga, and Paterson (1991)</span>).</p>
+<!--
+TODO explain why free
+-->
+
 <p>We will make use of the following definitions for monadic <em>unit</em> and <em>multiplication</em>.</p>
 <p><span class="math">\(\begin{align} \eta_{F} &amp; : 1 \nt F \bigstar\\ \eta_{F,X} &amp; = var_{F,X} \end{align} \)</span></p>
 <p><span class="math">\(\begin{align} \join_{F} &amp; : F \bigstar \cdot F \bigstar \nt F \bigstar\\ \join_{F,X} &amp; = \cata{[roll_{F,X} \,, id_{F\bigstar X}]} \end{align} \)</span></p>
@@ -91,10 +104,10 @@ F \bigstar X \ar@{.&gt;}[r]^{\cata{[\alpha \,, \xi]}} &amp; Y \\
 X \ar[u]^{\var_{F,X}} \ar[ur]_{\xi}}
 \]</span></p>
 <h2 id="tree-homomorphisms">Tree homomorphisms</h2>
-<p>For cocontinuous functors <span class="math">\(F\)</span> and <span class="math">\(G\)</span>, we call a natural transformation</p>
+<p>For <span class="math">\(\omega\)</span>-cocontinuous functors <span class="math">\(F\)</span> and <span class="math">\(G\)</span>, we call a natural transformation</p>
 <p><span class="math">\[\rho : F \nt G \bigstar\]</span></p>
 <p>a <em>tree homomorphism</em> (<span class="citation">Bahr and Hvitved (2011)</span>).</p>
-<p>For any <span class="math">\(F\)</span> and <span class="math">\(G\)</span> the following map is defined: each tree homomorphism gives rise to a polymorphic <span class="math">\(F\)</span>-algebra.</p>
+<p>For any <span class="math">\(F\)</span> and <span class="math">\(G\)</span> the following map is defined: each tree homomorphism gives rise to a parameterised family of <span class="math">\(F\)</span>-algebras.</p>
 <p><span class="math">\(\begin{align} \sem{\_} &amp; : (F \nt G \bigstar) \to (F \cdot (G \bigstar) \nt G \bigstar) \\ \sem{\rho} &amp; = [ \join \cdot \rho \,, \eta ] \end{align}\)</span></p>
 <!--
 (TODO. If I wanted to say that this is a morphism, cartesian
@@ -110,13 +123,13 @@ look into categorical semantics for polymorphic type theory)
 <h3 id="statement">Statement</h3>
 <p>In the cited paper, Bahr and Hvitved describe the following binary operator, taking in input both a <span class="math">\(G\)</span>-algebra and a tree homomorphism from <span class="math">\(F\)</span> to <span class="math">\(G\)</span>, and returning an <span class="math">\(F\)</span>-algebra.</p>
 <p><span class="math">\(\begin{align} \_⊡\_ &amp; : (G Y \to Y) → (F \nt G \bigstar) → (F Y \to Y)\\ \alpha ⊡ \rho &amp; = \cata{[ \alpha \,, ! ]} \cdot \rho \cdot \text{out} \end{align}\)</span></p>
-<p>In the setting of the Haskell programming language, the authors state the validity of the following <em>fusion</em> law.</p>
+<p>In the context of the Haskell programming language, the authors state the validity of the following <em>fusion</em> law.</p>
 <p><span class="math">\[\frac {(G : \B \indfun \B)
      (\alpha : Alg_G)
      (\rho : F \nt G \bigstar)}
     {\cata{\alpha} \cdot \catath{\rho} = \cata{\alpha ⊡ \rho}} \]</span></p>
 <h3 id="proof">Proof</h3>
-<p>The cited paper does not provide a proof: we try to construct one here, in a slightly more abstract setting. We will later discuss how it relates to the original setting.</p>
+<p>The cited paper does not provide a proof: we try to construct one here, in a slightly more abstract setting. We will later discuss how it relates to the original context.</p>
 <p>For any <span class="math">\(\rho\)</span>, we start by considering the commuting diagram given by initiality.</p>
 <p><span class="math">\[
 \xymatrix {
@@ -128,7 +141,7 @@ look into categorical semantics for polymorphic type theory)
 \bot \ar[u]^{\var_{F,\bot}} \ar[ur]_{\var_{G,\bot}}}
 \]</span></p>
 <p>Consider now an algebra <span class="math">\(\alpha : G T \to T\)</span>.</p>
-<p>We add to the right of the diagram the arrow <span class="math">\(\cata{\alpha} : \mu G \to T\)</span> (isomorphic to <span class="math">\(\cata{[ \alpha , ! ]} : G \bigstar \bot \to T\)</span>), which consequently allows to add several other related morphisms that “typecheck”.</p>
+<p>We add to the right of the diagram the arrow <span class="math">\(\cata{\alpha} : \mu G \to T\)</span> (isomorphic to <span class="math">\(\cata{[ \alpha , ! ]} : G \bigstar \bot \to T\)</span>) and some other compatible morphisms.</p>
 <p><span class="math">\[
 \xymatrix{
     F (F \bigstar \bot) \ar[dd]_{\text{in}_F = \roll_{F,\bot}} \ar[r]^{F \catath{\rho}} \ar@{}[ddr]|{(a)} &amp; F (G \bigstar \bot) \ar[d]^{\rho_{G \bigstar \bot}}  \ar[r]^{F \cata{\alpha}} \ar@{}[dr]|{(b)} &amp; F T \ar[d]^{\rho_{T}} \\
@@ -137,9 +150,9 @@ F \bigstar \bot \ar[r]^{\catath{\rho}}                                          
                                                                                                       &amp; \bot \ar[lu]^{var_F} \ar[u]_{var_G} \ar[ur]_{!_T}
 }
 \]</span></p>
-<p>Notice that:</p>
+<p>We can notice that:</p>
 <ul>
-<li><p>as said above, square (a) commutes by <em>initiality</em> for free monads;</p></li>
+<li><p>square (a) commutes by <em>initiality</em> for free monads;</p></li>
 <li><p>square (b) commutes by <em>naturality</em> of <span class="math">\(\rho\)</span>;</p></li>
 <li><p>the triangles at the bottom commute by <em>initiality</em> of <span class="math">\(\bot\)</span>.</p></li>
 </ul>
@@ -192,10 +205,16 @@ F \bigstar \bot \ar[r]^{\catath{\rho}}                                          
 <p>We conclude that also (c) is commutative, hence the whole diagram commutes.</p>
 <p>At the right edge of the upper part of the diagram one has the <span class="math">\(F\)</span>-algebra <span class="math">\((\!∣ \alpha , id ∣\!) \cdot \rho_T : F T \to T\)</span>. This is exactly how <span class="math">\(\alpha ⊡ \rho\)</span> is defined.</p>
 <p>The <em>initiality</em> property for free monads given above allows us to conclude that <span class="math">\(\cata{\alpha ⊡ \rho} = \cata{\alpha} \cdot \catath{\rho}\)</span>.</p>
-<h3 id="justification-of-inductive-reasoning">Justification of inductive reasoning</h3>
-<p>The appeal to induction can be justified using the techniques from <span class="citation">Ghani, Johann, and Fumex (2012)</span>: we give a sketch of how to proceed.</p>
-<p>TODO</p>
 <!--
+(So many people seem to never justify this, why should I?)
+
+### Justification of inductive reasoning
+
+The appeal to induction can be justified using the techniques from
+@DBLP:journals/corr/abs-1206-0357: we give a sketch of how to proceed.
+
+TODO
+
 (TODO. Set-valued predicate over B objects?
        It would be nice... Predicativity issues?)
 
@@ -257,8 +276,6 @@ Conclusions
 
 <h2 id="references">References</h2>
 <p>Bahr, Patrick, and Tom Hvitved. 2011. “Compositional data types.” In <em>Proceedings of the seventh ACM SIGPLAN workshop on Generic programming</em>, 83–94. WGP ’11. New York, NY, USA: ACM. <a href="http://doi.acm.org/10.1145/2036918.2036930" title="http://doi.acm.org/10.1145/2036918.2036930">http://doi.acm.org/10.1145/2036918.2036930</a>.</p>
-<p>Day, Laurence E., and Graham Hutton. 2012. “Towards modular compilers for effects.” In <em>Proceedings of the 12th international conference on Trends in Functional Programming</em>, 49–64. TFP’11. Berlin, Heidelberg: Springer-Verlag. <a href="http://dx.doi.org/10.1007/978-3-642-32037-8_4" title="http://dx.doi.org/10.1007/978-3-642-32037-8_4">http://dx.doi.org/10.1007/978-3-642-32037-8_4</a>.</p>
-<p>Ghani, Neil, Patricia Johann, and Clément Fumex. 2012. “Generic Fibrational Induction.” <em>Logical Methods in Computer Science</em> 8 (2).</p>
 <p>Meijer, Erik, Maarten Fokkinga, and Ross Paterson. 1991. “Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire.” In , 124–144. Springer-Verlag.</p>
 </body>
 </html>

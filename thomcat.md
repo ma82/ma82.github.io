@@ -33,6 +33,7 @@ Abstract
 These notes describe a proof to a *fusion* law for *tree
 homomorphisms* (@bahr11wgp) in terms of elementary category theory.
 
+<!--
 We discuss how it is possible to instantiate the abstract reasoning to
 different more concrete settings.
 
@@ -40,6 +41,7 @@ As an example application we show a simple equational method which
 allows to build modular compilers (@Day:2011:TMC:2362963.2362969) with
 modular proofs of correctness, an approach we put into practice in the
 dependently-typed language Agda.
+-->
 
 Introduction
 ------------
@@ -59,7 +61,7 @@ $\newcommand{\B}{\mathbf{B}}
  \newcommand{\Set}{\mathbf{Set}}
 $We need a cartesian closed category $\B$ with an initial object $\bot$.
 
-TODO. Or a comprehension category with unit? See the end.
+<!-- TODO. Or a comprehension category with unit? See the end. -->
 
 If $1 : \B \to \B$ is the identity functor and $K_X : \B \to \B$ is
 the constant functor to the object $X$,
@@ -98,11 +100,11 @@ $$
 For any $F$, $F$-algebras and $F$-algebra homomorphisms form a
 category $Alg_F$.
 
-We use the notation $F : \B \indfun \B$ for cocontinuous
-(endo)functors $F$ over $\B$. As proved in TODO, all cocontinuous
-functors admit an initial algebra, i.e. for any $F : \B \indfun \B$
-there exist an object $\mu F : \B$ and a morphism $in_F : F (\mu F)
-\to \mu F$ which form an initial object of $Alg_F$.
+We use the notation $F : \B \indfun \B$ for $\omega$-cocontinuous
+(endo)functors $F$ over $\B$. A standard result is that all
+$\omega$-cocontinuous functors admit an initial algebra, i.e. for any
+$F : \B \indfun \B$ there exist an object $\mu F : \B$ and a morphism
+$in_F : F (\mu F) \to \mu F$ which form an initial object of $Alg_F$.
 
 By Lambek's lemma, the initial algebra $in_F : F (\mu F) \to \mu F$ is
 an isomorphism: we call $out_F$ its inverse. For any inductive functor
@@ -117,19 +119,19 @@ $$
 	     \mu F  \ar@{.>}[r]^{\cata{\alpha}}   & Y }
 $$
 
-We consider isomorphic objects, morphisms and functors *equal* (TODO),
-and we drop subscripts when inferable from the context.
+We consider isomorphic objects, morphisms and functors *equal*, and we
+drop subscripts when inferable from the context.
 
 Free monad construction
 -----------------------
 
-For any cocontinuous functor $F : \B \indfun \B$ and object $X : \B$,
+For any $\omega$-cocontinuous functor $F : \B \indfun \B$ and object $X : \B$,
 let us consider the assignment
 
 $$F \star X = F + K_X$$
 
-$F \star X$ is an cocontinous functor as well (TODO). We define a
-similar notation for (the carrier of) its initial algebra:
+$F \star X$ is an cocontinous functor as well. We define a similar
+notation for (the carrier of) its initial algebra:
 
 $$F \bigstar X = \mu \, (F \star X)$$
 
@@ -142,8 +144,8 @@ $\begin{align}
 \var_{F,X} & = in \cdot inr
 \end{align}$
 
-Also $F \bigstar$ is a cocontinuous functor: we simply show a valid
-definition for its action on morphisms.
+Also $F \bigstar$ is a ($\omega$-cocontinuous) functor: we simply show
+a valid definition for its action on morphisms.
 
 $\begin{align}
 F \bigstar \, \_ & : (X \to Y) \to (F X \to F Y)\\
@@ -151,7 +153,11 @@ F \bigstar \, f & = \cata{[ roll \,, var \cdot f ]}
 \end{align}$
 
 $F \bigstar$ is a monad as well, known as the *free monad* over $F$
-(@Meijer91functionalprogramming, TODO explain why free).
+(@Meijer91functionalprogramming).
+
+<!--
+TODO explain why free
+-->
 
 We will make use of the following definitions for monadic *unit* and
 *multiplication*.
@@ -185,7 +191,7 @@ $$
 Tree homomorphisms
 ------------------
 
-For cocontinuous functors $F$ and $G$, we call a natural
+For $\omega$-cocontinuous functors $F$ and $G$, we call a natural
 transformation
 
 $$\rho : F \nt G \bigstar$$
@@ -193,7 +199,7 @@ $$\rho : F \nt G \bigstar$$
 a *tree homomorphism* (@bahr11wgp).
 
 For any $F$ and $G$ the following map is defined: each tree
-homomorphism gives rise to a polymorphic $F$-algebra.
+homomorphism gives rise to a parameterised family of $F$-algebras.
 
 $\begin{align}
 \sem{\_} & : (F \nt G \bigstar) \to (F \cdot (G \bigstar) \nt G \bigstar) \\
@@ -235,7 +241,7 @@ $\begin{align}
 \alpha ⊡ \rho & = \cata{[ \alpha \,, ! ]} \cdot \rho \cdot \text{out}
 \end{align}$
 
-In the setting of the Haskell programming language, the authors state
+In the context of the Haskell programming language, the authors state
 the validity of the following *fusion* law.
 
 $$\frac {(G : \B \indfun \B)
@@ -247,7 +253,7 @@ $$\frac {(G : \B \indfun \B)
 
 The cited paper does not provide a proof: we try to construct one
 here, in a slightly more abstract setting. We will later discuss how
-it relates to the original setting.
+it relates to the original context.
 
 For any $\rho$, we start by considering the commuting diagram given by
 initiality.
@@ -265,9 +271,8 @@ $$
 Consider now an algebra $\alpha : G T \to T$.
 
 We add to the right of the diagram the arrow $\cata{\alpha} : \mu G
-\to T$ (isomorphic to $\cata{[ \alpha , ! ]} : G \bigstar \bot \to
-T$), which consequently allows to add several other related morphisms
-that "typecheck".
+\to T$ (isomorphic to $\cata{[ \alpha , ! ]} : G \bigstar \bot \to T$)
+and some other compatible morphisms.
 
 $$
 \xymatrix{
@@ -278,9 +283,9 @@ F \bigstar \bot \ar[r]^{\catath{\rho}}                                          
 }
 $$
 
-Notice that:
+We can notice that:
 
-* as said above, square (a) commutes by *initiality* for free monads;
+* square (a) commutes by *initiality* for free monads;
 
 * square (b) commutes by *naturality* of $\rho$;
 
@@ -346,6 +351,9 @@ The *initiality* property for free monads given above allows us to
 conclude that $\cata{\alpha ⊡ \rho} = \cata{\alpha} \cdot
 \catath{\rho}$.
 
+<!--
+(So many people seem to never justify this, why should I?)
+
 ### Justification of inductive reasoning
 
 The appeal to induction can be justified using the techniques from
@@ -353,7 +361,6 @@ The appeal to induction can be justified using the techniques from
 
 TODO
 
-<!--
 (TODO. Set-valued predicate over B objects?
        It would be nice... Predicativity issues?)
 
