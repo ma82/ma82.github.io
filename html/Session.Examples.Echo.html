@@ -1,0 +1,1000 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Session.Examples.Echo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+<link href="Agda.css" rel="stylesheet" type="text/css"/></head><body><p><a href="https://www.gnu.org/licenses/gpl.html">2013-2014 matteo.acerbi@gmail.com</a></p>
+<pre></a
+  ><a name="90" class="Keyword"
+  >module</a
+  ><a name="96"
+  > </a
+  ><a name="97" href="Session.Examples.Echo.html#1" class="Module"
+  >Session.Examples.Echo</a
+  ><a name="118"
+  > </a
+  ><a name="119" class="Keyword"
+  >where</a
+  ><a name="124"
+  >
+
+</a
+  ><a name="126" class="Keyword"
+  >open</a
+  ><a name="130"
+  > </a
+  ><a name="131" class="Keyword"
+  >import</a
+  ><a name="137"
+  > </a
+  ><a name="138" href="Base.html#1" class="Module"
+  >Base</a
+  ><a name="142"
+  >
+</a
+  ><a name="143" class="Keyword"
+  >open</a
+  ><a name="147"
+  > </a
+  ><a name="148" class="Keyword"
+  >import</a
+  ><a name="154"
+  > </a
+  ><a name="155" href="Session.html#1" class="Module"
+  >Session</a
+  ><a name="162"
+  ></pre>
+
+<pre></a
+  ><a name="188" class="Keyword"
+  >open</a
+  ><a name="192"
+  > </a
+  ><a name="193" href="Session.html#12587" class="Module"
+  >IO</a
+  ><a name="195"
+  >
+</a
+  ><a name="196" class="Keyword"
+  >open</a
+  ><a name="200"
+  > </a
+  ><a name="201" class="Keyword"
+  >import</a
+  ><a name="207"
+  > </a
+  ><a name="208" href="Data.String.html#1" class="Module"
+  >Data.String</a
+  ><a name="219"
+  >
+
+</a
+  ><a name="221" href="Session.Examples.Echo.html#221" class="Function"
+  >Ty</a
+  ><a name="223"
+  > </a
+  ><a name="224" class="Symbol"
+  >:</a
+  ><a name="225"
+  > </a
+  ><a name="226" href="Session.html#221" class="Function"
+  >Code</a
+  ><a name="230"
+  >
+</a
+  ><a name="231" href="Session.Examples.Echo.html#221" class="Function"
+  >Ty</a
+  ><a name="233"
+  > </a
+  ><a name="234" class="Symbol"
+  >=</a
+  ><a name="235"
+  > </a
+  ><a name="236" href="Base.html#136" class="Record"
+  >&#8868;</a
+  ><a name="237"
+  > </a
+  ><a name="238" href="Data.Product.html#509" class="InductiveConstructor Operator"
+  >,</a
+  ><a name="239"
+  > </a
+  ><a name="240" href="Base.html#136" class="Record"
+  >&#8868;</a
+  ><a name="241"
+  > </a
+  ><a name="242" href="Data.Product.html#509" class="InductiveConstructor Operator"
+  >,</a
+  ><a name="243"
+  > </a
+  ><a name="244" href="Session.html#825" class="Function"
+  >`&#928;^</a
+  ><a name="247"
+  > </a
+  ><a name="248" href="Data.String.html#900" class="Postulate"
+  >String</a
+  ><a name="254"
+  > </a
+  ><a name="255" class="Symbol"
+  >&#955;</a
+  ><a name="256"
+  > </a
+  ><a name="257" href="Session.Examples.Echo.html#257" class="Bound"
+  >x</a
+  ><a name="258"
+  > </a
+  ><a name="259" class="Symbol"
+  >&#8594;</a
+  ><a name="260"
+  > </a
+  ><a name="261" href="Session.html#429" class="InductiveConstructor"
+  >`&#931;</a
+  ><a name="263"
+  > </a
+  ><a name="264" class="Symbol"
+  >(</a
+  ><a name="265" href="Data.Product.html#439" class="Record"
+  >&#931;</a
+  ><a name="266"
+  > </a
+  ><a name="267" href="Data.String.html#900" class="Postulate"
+  >String</a
+  ><a name="273"
+  > </a
+  ><a name="274" class="Symbol"
+  >(</a
+  ><a name="275" href="Relation.Binary.Core.html#4603" class="Datatype Operator"
+  >_&#8801;_</a
+  ><a name="278"
+  > </a
+  ><a name="279" href="Session.Examples.Echo.html#257" class="Bound"
+  >x</a
+  ><a name="280" class="Symbol"
+  >))</a
+  ><a name="282"
+  > </a
+  ><a name="283" class="Symbol"
+  >(</a
+  ><a name="284" href="Session.html#321" class="InductiveConstructor"
+  >`I</a
+  ><a name="286"
+  > </a
+  ><a name="287" class="Symbol"
+  >_)</a
+  ><a name="289"
+  >
+
+</a
+  ><a name="291" href="Session.Examples.Echo.html#291" class="Function"
+  >server</a
+  ><a name="297"
+  > </a
+  ><a name="298" class="Symbol"
+  >:</a
+  ><a name="299"
+  > </a
+  ><a name="300" href="Data.List.html#696" class="InductiveConstructor"
+  >[]</a
+  ><a name="302"
+  > </a
+  ><a name="303" href="Data.List.html#711" class="InductiveConstructor Operator"
+  >&#8759;</a
+  ><a name="304"
+  > </a
+  ><a name="305" class="Symbol"
+  >(</a
+  ><a name="306" href="Data.Maybe.Core.html#353" class="InductiveConstructor"
+  >&gt;</a
+  ><a name="307"
+  > </a
+  ><a name="308" href="Base.html#4867" class="InductiveConstructor"
+  >+</a
+  ><a name="309"
+  > </a
+  ><a name="310" href="Data.Product.html#509" class="InductiveConstructor Operator"
+  >,</a
+  ><a name="311"
+  > </a
+  ><a name="312" href="Base.html#136" class="Record"
+  >&#8868;</a
+  ><a name="313"
+  > </a
+  ><a name="314" href="Data.Product.html#509" class="InductiveConstructor Operator"
+  >,</a
+  ><a name="315"
+  > </a
+  ><a name="316" href="Base.html#136" class="Record"
+  >&#8868;</a
+  ><a name="317"
+  > </a
+  ><a name="318" href="Data.Product.html#509" class="InductiveConstructor Operator"
+  >,</a
+  ><a name="319"
+  > </a
+  ><a name="320" href="Session.html#591" class="InductiveConstructor Operator"
+  >&#161;</a
+  ><a name="321"
+  > </a
+  ><a name="322" href="Session.Examples.Echo.html#221" class="Function"
+  >Ty</a
+  ><a name="324" class="Symbol"
+  >)</a
+  ><a name="325"
+  > </a
+  ><a name="326" href="Session.html#12647" class="Function Operator"
+  >[IO</a
+  ><a name="329"
+  > </a
+  ><a name="330" href="Base.html#136" class="Record"
+  >&#8868;</a
+  ><a name="331"
+  > </a
+  ><a name="332" href="Session.html#12647" class="Function Operator"
+  >]&gt;</a
+  ><a name="334"
+  > </a
+  ><a name="335" href="Data.List.html#696" class="InductiveConstructor"
+  >[]</a
+  ><a name="337"
+  >
+</a
+  ><a name="338" href="Session.Examples.Echo.html#291" class="Function"
+  >server</a
+  ><a name="344"
+  > </a
+  ><a name="345" class="Symbol"
+  >=</a
+  ><a name="346"
+  > </a
+  ><a name="347" href="Session.html#9609" class="InductiveConstructor Operator"
+  >accept</a
+  ><a name="353"
+  > </a
+  ><a name="354" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="356"
+  > </a
+  ><a name="357" href="Data.List.All.html#779" class="InductiveConstructor"
+  >[]</a
+  ><a name="359"
+  > </a
+  ><a name="360" class="Symbol"
+  >(</a
+  ><a name="361" href="Session.html#11699" class="Function"
+  >get</a
+  ><a name="364"
+  > </a
+  ><a name="365" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="367"
+  > </a
+  ><a name="368" class="Symbol"
+  >&#955;</a
+  ><a name="369"
+  > </a
+  ><a name="370" href="Session.Examples.Echo.html#370" class="Bound"
+  >x</a
+  ><a name="371"
+  > </a
+  ><a name="372" class="Symbol"
+  >&#8594;</a
+  ><a name="373"
+  > </a
+  ><a name="374" href="Session.html#9533" class="InductiveConstructor Operator"
+  >&#8657;</a
+  ><a name="375"
+  > </a
+  ><a name="376" href="IO.Primitive.html#1501" class="Function"
+  >putStrLn</a
+  ><a name="384"
+  > </a
+  ><a name="385" href="Base.html#4675" class="Function Operator"
+  >&#171;</a
+  ><a name="386"
+  > </a
+  ><a name="387" class="String"
+  >&quot;Server received &quot;</a
+  ><a name="405"
+  > </a
+  ><a name="406" href="Data.String.html#1352" class="Function Operator"
+  >++</a
+  ><a name="408"
+  > </a
+  ><a name="409" href="Session.Examples.Echo.html#370" class="Bound"
+  >x</a
+  ><a name="410"
+  > </a
+  ><a name="411" href="Base.html#4675" class="Function Operator"
+  >&#187;</a
+  ><a name="412"
+  >
+                                  </a
+  ><a name="447" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="448"
+  > </a
+  ><a name="449" href="Session.html#9609" class="InductiveConstructor Operator"
+  >write</a
+  ><a name="454"
+  > </a
+  ><a name="455" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="457"
+  > </a
+  ><a name="458" class="Symbol"
+  >(</a
+  ><a name="459" href="Session.Examples.Echo.html#370" class="Bound"
+  >x</a
+  ><a name="460"
+  > </a
+  ><a name="461" href="Data.Product.html#509" class="InductiveConstructor Operator"
+  >,</a
+  ><a name="462"
+  > </a
+  ><a name="463" href="Relation.Binary.Core.html#4651" class="InductiveConstructor"
+  >&lt;&gt;</a
+  ><a name="465" class="Symbol"
+  >)</a
+  ><a name="466"
+  >
+                                  </a
+  ><a name="501" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="502"
+  > </a
+  ><a name="503" href="Session.html#9533" class="InductiveConstructor Operator"
+  >&#8657;</a
+  ><a name="504"
+  > </a
+  ><a name="505" href="IO.Primitive.html#1501" class="Function"
+  >putStrLn</a
+  ><a name="513"
+  > </a
+  ><a name="514" href="Base.html#4675" class="Function Operator"
+  >&#171;</a
+  ><a name="515"
+  > </a
+  ><a name="516" class="String"
+  >&quot;Server sent &quot;</a
+  ><a name="530"
+  >     </a
+  ><a name="535" href="Data.String.html#1352" class="Function Operator"
+  >++</a
+  ><a name="537"
+  > </a
+  ><a name="538" href="Session.Examples.Echo.html#370" class="Bound"
+  >x</a
+  ><a name="539"
+  > </a
+  ><a name="540" href="Base.html#4675" class="Function Operator"
+  >&#187;</a
+  ><a name="541"
+  >
+                                  </a
+  ><a name="576" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="577"
+  > </a
+  ><a name="578" href="Session.html#9609" class="InductiveConstructor Operator"
+  >end</a
+  ><a name="581"
+  > </a
+  ><a name="582" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="584" class="Symbol"
+  >)</a
+  ><a name="585"
+  >
+
+</a
+  ><a name="587" href="Session.Examples.Echo.html#587" class="Function"
+  >client</a
+  ><a name="593"
+  > </a
+  ><a name="594" class="Symbol"
+  >:</a
+  ><a name="595"
+  > </a
+  ><a name="596" href="Data.List.html#696" class="InductiveConstructor"
+  >[]</a
+  ><a name="598"
+  > </a
+  ><a name="599" href="Data.List.html#711" class="InductiveConstructor Operator"
+  >&#8759;</a
+  ><a name="600"
+  > </a
+  ><a name="601" class="Symbol"
+  >(</a
+  ><a name="602" href="Data.Maybe.Core.html#353" class="InductiveConstructor"
+  >&gt;</a
+  ><a name="603"
+  > </a
+  ><a name="604" href="Base.html#4869" class="InductiveConstructor"
+  >-</a
+  ><a name="605"
+  > </a
+  ><a name="606" href="Data.Product.html#509" class="InductiveConstructor Operator"
+  >,</a
+  ><a name="607"
+  > </a
+  ><a name="608" href="Base.html#136" class="Record"
+  >&#8868;</a
+  ><a name="609"
+  > </a
+  ><a name="610" href="Data.Product.html#509" class="InductiveConstructor Operator"
+  >,</a
+  ><a name="611"
+  > </a
+  ><a name="612" href="Base.html#136" class="Record"
+  >&#8868;</a
+  ><a name="613"
+  > </a
+  ><a name="614" href="Data.Product.html#509" class="InductiveConstructor Operator"
+  >,</a
+  ><a name="615"
+  > </a
+  ><a name="616" href="Session.html#591" class="InductiveConstructor Operator"
+  >&#161;</a
+  ><a name="617"
+  > </a
+  ><a name="618" href="Session.Examples.Echo.html#221" class="Function"
+  >Ty</a
+  ><a name="620" class="Symbol"
+  >)</a
+  ><a name="621"
+  > </a
+  ><a name="622" href="Session.html#12647" class="Function Operator"
+  >[IO</a
+  ><a name="625"
+  > </a
+  ><a name="626" href="Base.html#136" class="Record"
+  >&#8868;</a
+  ><a name="627"
+  > </a
+  ><a name="628" href="Session.html#12647" class="Function Operator"
+  >]&gt;</a
+  ><a name="630"
+  > </a
+  ><a name="631" href="Data.List.html#696" class="InductiveConstructor"
+  >[]</a
+  ><a name="633"
+  >
+</a
+  ><a name="634" href="Session.Examples.Echo.html#587" class="Function"
+  >client</a
+  ><a name="640"
+  > </a
+  ><a name="641" class="Symbol"
+  >=</a
+  ><a name="642"
+  > </a
+  ><a name="643" href="Session.html#9609" class="InductiveConstructor Operator"
+  >twice</a
+  ><a name="648"
+  > </a
+  ><a name="649" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="651"
+  > </a
+  ><a name="652" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="653"
+  > </a
+  ><a name="654" href="Session.html#10444"
+  >twice</a
+  ><a name="659"
+  > </a
+  ><a name="660" href="Base.html#2821"
+  >Z|</a
+  ><a name="662"
+  > </a
+  ><a name="663" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="664"
+  >
+         </a
+  ><a name="674" href="Session.Examples.Echo.html#674" class="Bound"
+  >x</a
+  ><a name="675"
+  > </a
+  ><a name="676" href="Session.html#11182" class="Function"
+  >&lt;-</a
+  ><a name="678"
+  > </a
+  ><a name="679" href="Session.html#10294"
+  >connect</a
+  ><a name="686"
+  > </a
+  ><a name="687" href="Base.html#2821"
+  >Z|</a
+  ><a name="689"
+  > </a
+  ><a name="690" class="Symbol"
+  >(</a
+  ><a name="691" href="Session.html#11490" class="Function"
+  >put</a
+  ><a name="694"
+  > </a
+  ><a name="695" href="Base.html#2821"
+  >Z|</a
+  ><a name="697"
+  > </a
+  ><a name="698" class="String"
+  >&quot;A&quot;</a
+  ><a name="701"
+  > </a
+  ><a name="702" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="703"
+  > </a
+  ><a name="704" href="Session.html#10594"
+  >read</a
+  ><a name="708"
+  > </a
+  ><a name="709" href="Base.html#2821"
+  >Z|</a
+  ><a name="711"
+  > </a
+  ><a name="712" href="Session.html#9685" class="InductiveConstructor Operator"
+  >&#187;=</a
+  ><a name="714"
+  > </a
+  ><a name="715" class="Symbol"
+  >&#955;</a
+  ><a name="716"
+  > </a
+  ><a name="717" href="Session.Examples.Echo.html#717" class="Bound"
+  >x</a
+  ><a name="718"
+  > </a
+  ><a name="719" class="Symbol"
+  >&#8594;</a
+  ><a name="720"
+  > </a
+  ><a name="721" href="Session.html#9609" class="InductiveConstructor Operator"
+  >end</a
+  ><a name="724"
+  > </a
+  ><a name="725" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="727"
+  > </a
+  ><a name="728" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="729"
+  > </a
+  ><a name="730" href="Session.html#9533" class="InductiveConstructor Operator"
+  >&#8657;</a
+  ><a name="731"
+  > </a
+  ><a name="732" href="IO.Primitive.html#588" class="Function"
+  >return</a
+  ><a name="738"
+  > </a
+  ><a name="739" href="Session.Examples.Echo.html#717" class="Bound"
+  >x</a
+  ><a name="740" class="Symbol"
+  >)</a
+  ><a name="741"
+  >
+       </a
+  ><a name="749" href="Session.html#11182" class="Function"
+  >&#8943;</a
+  ><a name="750"
+  > </a
+  ><a name="751" href="Session.html#9533" class="InductiveConstructor Operator"
+  >&#8657;</a
+  ><a name="752"
+  > </a
+  ><a name="753" href="IO.Primitive.html#1501" class="Function"
+  >putStrLn</a
+  ><a name="761"
+  > </a
+  ><a name="762" href="Base.html#4675" class="Function Operator"
+  >&#171;</a
+  ><a name="763"
+  > </a
+  ><a name="764" class="String"
+  >&quot;Client received &quot;</a
+  ><a name="782"
+  > </a
+  ><a name="783" href="Data.String.html#1352" class="Function Operator"
+  >++</a
+  ><a name="785"
+  > </a
+  ><a name="786" href="Data.Product.html#525" class="Field"
+  >fst</a
+  ><a name="789"
+  > </a
+  ><a name="790" href="Session.Examples.Echo.html#674" class="Bound"
+  >x</a
+  ><a name="791"
+  > </a
+  ><a name="792" href="Base.html#4675" class="Function Operator"
+  >&#187;</a
+  ><a name="793"
+  >
+       </a
+  ><a name="801" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="802"
+  > </a
+  ><a name="803" href="Session.Examples.Echo.html#803" class="Bound"
+  >y</a
+  ><a name="804"
+  > </a
+  ><a name="805" href="Session.html#11182" class="Function"
+  >&lt;-</a
+  ><a name="807"
+  > </a
+  ><a name="808" href="Session.html#9609" class="InductiveConstructor Operator"
+  >connect</a
+  ><a name="815"
+  > </a
+  ><a name="816" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="818"
+  > </a
+  ><a name="819" class="Symbol"
+  >(</a
+  ><a name="820" href="Session.html#11490" class="Function"
+  >put</a
+  ><a name="823"
+  > </a
+  ><a name="824" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="826"
+  > </a
+  ><a name="827" class="String"
+  >&quot;B&quot;</a
+  ><a name="830"
+  > </a
+  ><a name="831" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="832"
+  > </a
+  ><a name="833" href="Session.html#9609" class="InductiveConstructor Operator"
+  >read</a
+  ><a name="837"
+  > </a
+  ><a name="838" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="840"
+  > </a
+  ><a name="841" href="Session.html#9685" class="InductiveConstructor Operator"
+  >&#187;=</a
+  ><a name="843"
+  > </a
+  ><a name="844" class="Symbol"
+  >&#955;</a
+  ><a name="845"
+  > </a
+  ><a name="846" href="Session.Examples.Echo.html#846" class="Bound"
+  >x</a
+  ><a name="847"
+  > </a
+  ><a name="848" class="Symbol"
+  >&#8594;</a
+  ><a name="849"
+  > </a
+  ><a name="850" href="Session.html#9609" class="InductiveConstructor Operator"
+  >end</a
+  ><a name="853"
+  > </a
+  ><a name="854" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="856"
+  > </a
+  ><a name="857" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="858"
+  > </a
+  ><a name="859" href="Session.html#9533" class="InductiveConstructor Operator"
+  >&#8657;</a
+  ><a name="860"
+  > </a
+  ><a name="861" href="IO.Primitive.html#588" class="Function"
+  >return</a
+  ><a name="867"
+  > </a
+  ><a name="868" href="Session.Examples.Echo.html#846" class="Bound"
+  >x</a
+  ><a name="869" class="Symbol"
+  >)</a
+  ><a name="870"
+  >
+       </a
+  ><a name="878" href="Session.html#11182" class="Function"
+  >&#8943;</a
+  ><a name="879"
+  > </a
+  ><a name="880" href="Session.html#9533" class="InductiveConstructor Operator"
+  >&#8657;</a
+  ><a name="881"
+  > </a
+  ><a name="882" href="IO.Primitive.html#1501" class="Function"
+  >putStrLn</a
+  ><a name="890"
+  > </a
+  ><a name="891" href="Base.html#4675" class="Function Operator"
+  >&#171;</a
+  ><a name="892"
+  > </a
+  ><a name="893" class="String"
+  >&quot;Client received &quot;</a
+  ><a name="911"
+  > </a
+  ><a name="912" href="Data.String.html#1352" class="Function Operator"
+  >++</a
+  ><a name="914"
+  > </a
+  ><a name="915" href="Data.Product.html#525" class="Field"
+  >fst</a
+  ><a name="918"
+  > </a
+  ><a name="919" href="Session.Examples.Echo.html#803" class="Bound"
+  >y</a
+  ><a name="920"
+  > </a
+  ><a name="921" href="Base.html#4675" class="Function Operator"
+  >&#187;</a
+  ><a name="922"
+  >
+       </a
+  ><a name="930" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="931"
+  > </a
+  ><a name="932" href="Session.Examples.Echo.html#932" class="Bound"
+  >z</a
+  ><a name="933"
+  > </a
+  ><a name="934" href="Session.html#11182" class="Function"
+  >&lt;-</a
+  ><a name="936"
+  > </a
+  ><a name="937" href="Session.html#9609" class="InductiveConstructor Operator"
+  >connect</a
+  ><a name="944"
+  > </a
+  ><a name="945" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="947"
+  > </a
+  ><a name="948" class="Symbol"
+  >(</a
+  ><a name="949" href="Session.html#11490" class="Function"
+  >put</a
+  ><a name="952"
+  > </a
+  ><a name="953" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="955"
+  > </a
+  ><a name="956" class="String"
+  >&quot;C&quot;</a
+  ><a name="959"
+  > </a
+  ><a name="960" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="961"
+  > </a
+  ><a name="962" href="Session.html#9609" class="InductiveConstructor Operator"
+  >read</a
+  ><a name="966"
+  > </a
+  ><a name="967" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="969"
+  > </a
+  ><a name="970" href="Session.html#9685" class="InductiveConstructor Operator"
+  >&#187;=</a
+  ><a name="972"
+  > </a
+  ><a name="973" class="Symbol"
+  >&#955;</a
+  ><a name="974"
+  > </a
+  ><a name="975" href="Session.Examples.Echo.html#975" class="Bound"
+  >x</a
+  ><a name="976"
+  > </a
+  ><a name="977" class="Symbol"
+  >&#8594;</a
+  ><a name="978"
+  > </a
+  ><a name="979" href="Session.html#9609" class="InductiveConstructor Operator"
+  >end</a
+  ><a name="982"
+  > </a
+  ><a name="983" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  >Z|</a
+  ><a name="985"
+  > </a
+  ><a name="986" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="987"
+  > </a
+  ><a name="988" href="Session.html#9533" class="InductiveConstructor Operator"
+  >&#8657;</a
+  ><a name="989"
+  > </a
+  ><a name="990" href="IO.Primitive.html#588" class="Function"
+  >return</a
+  ><a name="996"
+  > </a
+  ><a name="997" href="Session.Examples.Echo.html#975" class="Bound"
+  >x</a
+  ><a name="998" class="Symbol"
+  >)</a
+  ><a name="999"
+  >
+       </a
+  ><a name="1007" href="Session.html#11182" class="Function"
+  >&#8943;</a
+  ><a name="1008"
+  > </a
+  ><a name="1009" href="Session.html#9533" class="InductiveConstructor Operator"
+  >&#8657;</a
+  ><a name="1010"
+  > </a
+  ><a name="1011" href="IO.Primitive.html#1501" class="Function"
+  >putStrLn</a
+  ><a name="1019"
+  > </a
+  ><a name="1020" href="Base.html#4675" class="Function Operator"
+  >&#171;</a
+  ><a name="1021"
+  > </a
+  ><a name="1022" class="String"
+  >&quot;Client received &quot;</a
+  ><a name="1040"
+  > </a
+  ><a name="1041" href="Data.String.html#1352" class="Function Operator"
+  >++</a
+  ><a name="1043"
+  > </a
+  ><a name="1044" href="Data.Product.html#525" class="Field"
+  >fst</a
+  ><a name="1047"
+  > </a
+  ><a name="1048" href="Session.Examples.Echo.html#932" class="Bound"
+  >z</a
+  ><a name="1049"
+  > </a
+  ><a name="1050" href="Base.html#4675" class="Function Operator"
+  >&#187;</a
+  ><a name="1051"
+  >
+       </a
+  ><a name="1059" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="1060"
+  > </a
+  ><a name="1061" href="Session.html#9533" class="InductiveConstructor Operator"
+  >&#8657;</a
+  ><a name="1062"
+  > </a
+  ><a name="1063" href="IO.Primitive.html#588" class="Function"
+  >return</a
+  ><a name="1069"
+  > </a
+  ><a name="1070" href="Base.html#168" class="InductiveConstructor"
+  >tt</a
+  ><a name="1072"
+  >
+
+
+</a
+  ><a name="1075" href="Session.Examples.Echo.html#1075" class="Function"
+  >main</a
+  ><a name="1079"
+  > </a
+  ><a name="1080" class="Symbol"
+  >:</a
+  ><a name="1081"
+  > </a
+  ><a name="1082" href="IO.Primitive.html#448" class="Function"
+  >IO.IO</a
+  ><a name="1087"
+  > </a
+  ><a name="1088" href="Unit.html#194" class="Function"
+  >C.&lt;&gt;</a
+  ><a name="1092"
+  >
+</a
+  ><a name="1093" href="Session.Examples.Echo.html#1075" class="Function"
+  >main</a
+  ><a name="1097"
+  > </a
+  ><a name="1098" class="Symbol"
+  >=</a
+  ><a name="1099"
+  > </a
+  ><a name="1100" href="Session.html#13684" class="Function"
+  >run</a
+  ><a name="1103"
+  > </a
+  ><a name="1104" href="Session.Examples.Echo.html#1146" class="Function"
+  >test</a
+  ><a name="1108"
+  > </a
+  ><a name="1109" href="Data.List.All.html#779" class="InductiveConstructor"
+  >[]</a
+  ><a name="1111"
+  > </a
+  ><a name="1112" href="Session.html#13163" class="Function Operator"
+  >&gt;&gt;</a
+  ><a name="1114"
+  > </a
+  ><a name="1115" href="Control.Concurrent.html#342" class="Function"
+  >C.threadDelay</a
+  ><a name="1128"
+  > </a
+  ><a name="1129" href="Control.Concurrent.html#322" class="Function"
+  >C.onesec</a
+  ><a name="1137"
+  > </a
+  ><a name="1138" class="Keyword"
+  >where</a
+  ><a name="1143"
+  >
+  </a
+  ><a name="1146" href="Session.Examples.Echo.html#1146" class="Function"
+  >test</a
+  ><a name="1150"
+  > </a
+  ><a name="1151" class="Symbol"
+  >=</a
+  ><a name="1152"
+  > </a
+  ><a name="1153" href="Session.Examples.Echo.html#1153" class="Bound"
+  >x</a
+  ><a name="1154"
+  > </a
+  ><a name="1155" href="Session.html#11182" class="Function"
+  >&lt;-</a
+  ><a name="1157"
+  > </a
+  ><a name="1158" href="Session.html#9609" class="InductiveConstructor Operator"
+  >new</a
+  ><a name="1161"
+  >
+       </a
+  ><a name="1169" href="Session.html#11182" class="Function"
+  >&#8943;</a
+  ><a name="1170"
+  > </a
+  ><a name="1171" href="Session.html#9609" class="InductiveConstructor Operator"
+  >fork</a
+  ><a name="1175"
+  > </a
+  ><a name="1176" class="Symbol"
+  >(</a
+  ><a name="1177" href="Data.List.All.html#779" class="InductiveConstructor"
+  >[]</a
+  ><a name="1179"
+  > </a
+  ><a name="1180" href="Data.List.All.html#796" class="InductiveConstructor Operator"
+  >,&#775;</a
+  ><a name="1182"
+  > </a
+  ><a name="1183" href="Session.html#1953" class="InductiveConstructor"
+  >-+</a
+  ><a name="1185" class="Symbol"
+  >)</a
+  ><a name="1186"
+  > </a
+  ><a name="1187" href="Session.Examples.Echo.html#291" class="Function"
+  >server</a
+  ><a name="1193"
+  >
+       </a
+  ><a name="1201" href="Session.html#11371" class="Function Operator"
+  >&#187;</a
+  ><a name="1202"
+  > </a
+  ><a name="1203" href="Session.Examples.Echo.html#587" class="Function"
+  >client</a
+  ><a name="1209"
+  ></pre></body></html>
