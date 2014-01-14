@@ -1,17 +1,19 @@
-body { margin-left:   10%;
-       margin-right:  10%;
+body { margin-left:   20%;
+       margin-right:  20%;
        line-height:  110%}
 
-@import url(http://fonts.googleapis.com/css?family=Rambla);
+/* @import url(http://fonts.googleapis.com/css?family=Rambla); */
 @import url(http://fonts.googleapis.com/css?family=Droid Sans);
-@import url(http://fonts.googleapis.com/css?family=EB+Garamond);
+/* @import url(http://fonts.googleapis.com/css?family=EB+Garamond); */
 /* @import url(http://fonts.googleapis.com/css?family=Rambla|Caudex|Puritan|Mako|Lato|Sorts+Mill+Goudy|PT+Serif|Marcellus|Libre+Baskerville|Esteban|Averia+Libre|Donegal+One|Lusitana|Alike|Shanti|Fjord+One); */
+@import url(Agda.ttf)
 
-html { font-family: Georgia; }
+
+html { font-family: Georgia; font-size : 120%}
 h1   { font-family: Droid Sans;
        padding: 2% 1% 2% 1% }
 h2   { padding: 2% 0% 2% 0% }
-pre  { font-family: DejaVu Sans Mono; }
+pre  { font-family: Agda; }
 
 /* Aspects. */
 .Comment       { color: #B22222 }
