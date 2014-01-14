@@ -95,10 +95,10 @@ $F : \B \indfun \B$ there exist an object $\mu F : \B$ and a morphism
 $in_F : F (\mu F) \to \mu F$ which form an initial object of $Alg_F$.
 
 By Lambek's lemma, the initial algebra $in_F : F (\mu F) \to \mu F$ is
-an isomorphism: we call $out_F$ its inverse. For any inductive functor
-$F$ we call *catamorphism* the *unique* algebra homomorphism from
-$in_F$ to a given algebra $\alpha : F Y \to Y$, for which we adopt the
-notation $\cata{\alpha}_F$ (@Meijer91functionalprogramming).
+an isomorphism: we call $out_F$ its inverse. For any cocontinuous
+functor $F$ we call *catamorphism* the *unique* algebra homomorphism
+from $in_F$ to a given algebra $\alpha : F Y \to Y$, for which we
+adopt the notation $\cata{\alpha}_F$ (@Meijer91functionalprogramming).
 
 Initiality of $in_F$ can be expressed diagrammatically:
 
