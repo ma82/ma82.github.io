@@ -24,24 +24,14 @@
     ©
 </span> 2013 Matteo Acerbi](http://creativecommons.org/licenses/by-sa/3.0/)
 
-Fusion law for tree homomorphisms
-=================================
+Fusion law for tree homomorphisms (DRAFT)
+=========================================
 
 Abstract
 --------
 
 These notes describe a proof to a *fusion* law for *tree
 homomorphisms* (@bahr11wgp) in terms of elementary category theory.
-
-<!--
-We discuss how it is possible to instantiate the abstract reasoning to
-different more concrete settings.
-
-As an example application we show a simple equational method which
-allows to build modular compilers (@Day:2011:TMC:2362963.2362969) with
-modular proofs of correctness, an approach we put into practice in the
-dependently-typed language Agda.
--->
 
 Introduction
 ------------
@@ -60,8 +50,6 @@ $\newcommand{\B}{\mathbf{B}}
  \newcommand{\catath}[1]{⟨\!∣ #1 ∣\!⟩}
  \newcommand{\Set}{\mathbf{Set}}
 $We need a cartesian closed category $\B$ with an initial object $\bot$.
-
-<!-- TODO. Or a comprehension category with unit? See the end. -->
 
 If $1 : \B \to \B$ is the identity functor and $K_X : \B \to \B$ is
 the constant functor to the object $X$,
@@ -155,10 +143,6 @@ F \bigstar \, f & = \cata{[ roll \,, var \cdot f ]}
 $F \bigstar$ is a monad as well, known as the *free monad* over $F$
 (@Meijer91functionalprogramming).
 
-<!--
-TODO explain why free
--->
-
 We will make use of the following definitions for monadic *unit* and
 *multiplication*.
 
@@ -206,13 +190,6 @@ $\begin{align}
 \sem{\rho} & = [ \join \cdot \rho \,, \eta ]
 \end{align}$
 
-<!--
-(TODO. If I wanted to say that this is a morphism, cartesian
-closedness would not be enough!  In which categories every natural
-transformations is a morphism, not a family of morphisms? I should
-look into categorical semantics for polymorphic type theory)
--->
-
 Leveraging $F \bigstar \bot \cong \mu F$, we obtain a morphism in $\B$
 by taking the catamorphism of $\sem{\rho}$ at $\bot$.
 
@@ -253,8 +230,6 @@ $$\frac {(G : \B \indfun \B)
 
 The cited paper does not provide a proof: we try to construct one
 here, in a slightly more abstract setting.
-
-<!-- We will later discuss how it relates to the original context. -->
 
 For any $\rho$, we start by considering the commuting diagram given by
 initiality.
@@ -351,73 +326,6 @@ exactly how $\alpha ⊡ \rho$ is defined.
 The *initiality* property for free monads given above allows us to
 conclude that $\cata{\alpha ⊡ \rho} = \cata{\alpha} \cdot
 \catath{\rho}$.
-
-<!--
-(So many people seem to never justify this, why should I?)
-
-### Justification of inductive reasoning
-
-The appeal to induction can be justified using the techniques from
-@DBLP:journals/corr/abs-1206-0357: we give a sketch of how to proceed.
-
-(TODO. Set-valued predicate over B objects?
-       It would be nice... Predicativity issues?)
-
-We need to add to the requirements the existence of a category $\P$ of
-predicates over objects of $\B$. The objects of $\P$ are pairs $(X :
-\B \,, P : X \to \Set)$ of an object of $\B$ and a map from that
-object to $\Set$. The morphisms of $\P$ are the predicate morphisms as
-described in Ghani et al.'s paper.
-
-$\P$ must contain all the identity predicates: indeed for every object
-$X$ one has $((X \times X) \,, \lambda (x_1 , x_2). x_1 = x_2) : \P$.
-
-TODO. My wish here was to generalise part 3 of the paper (Induction
-Rules for Predicates over Set) to set-valued predicates over any base
-category, so that I don't have to further specify my $\B$. Does that
-make any sense?
-
-More concrete proofs
---------------------
-
-### Constructive type theory
-
-* Strict positivity => Polynomials/containers
-* Indexed morphisms
-* Proofs: naturality is not provable, we restrict to tree
-  homomorphisms which are natural using a sigma type.
-* Example: Agda
-
-### System F$\omega$
-
-* Proofs in a parametric setting.
-* Model must be parametric (@DBLP:conf/csl/Atkey12), as parametricity
-  implies naturality (TODO (again)).
-
-### Haskell
-
-* Parametric model?! Depends.
-* Turing-completeness => category $\omega-CPO_\bot$ :
-  $\omega$-complete partial orders with a bottom element and *strict*
-  continuous functions between them.
-  
-    * Is this fine as a $\B$? TODO. Check.
-    * Fusion law proof does not apply to lazy algebras and tree homomorphisms.
-
-Example applications
---------------------
-
-### Coproduct of tree homomorphisms
-
-### Modular certified compilers
-
-Are *smart algebras* equivalent to tree homomorphisms?
-------------------------------------------------------
-
-Conclusions
------------
-
--->
 
 References
 ----------
