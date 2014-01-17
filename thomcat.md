@@ -24,8 +24,8 @@
     ©
 </span> 2013 Matteo Acerbi](http://creativecommons.org/licenses/by-sa/3.0/)
 
-Fusion law for tree homomorphisms (DRAFT)
-=========================================
+Fusion law for tree homomorphisms? (DRAFT)
+==========================================
 
 Abstract
 --------
