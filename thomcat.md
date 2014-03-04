@@ -81,7 +81,7 @@ the diagram below commutes is an *$F$-algebra homomorphism* from
 $\alpha$ to $\beta$.
 
 $$
-\xymatrix{F X \ar[d]^{\alpha} \ar[r]^{F k} & F Y \ar[d]^{\beta} \\
+\xymatrix{F X \ar[d]^{\alpha} \ar[r]^{F f} & F Y \ar[d]^{\beta} \\
 	    X \ar[r]^{f}                   & Y }
 $$
 
