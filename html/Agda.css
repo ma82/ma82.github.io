@@ -1,10 +1,14 @@
+@font-face {
+   font-family: "Agda";
+   src: local("Agda"), url('Agda.ttf');
+   format("truetype");
+}
+
+@import url(http://fonts.googleapis.com/css?family=Droid Sans);
+
 body { margin-left:   20%;
        margin-right:  20%;
        line-height:  110%}
-
-@import url(http://fonts.googleapis.com/css?family=Droid Sans);
-@import url(Agda.ttf)
-
 
 html { font-family: Georgia; font-size : 120%}
 h1   { font-family: Droid Sans;
