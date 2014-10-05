@@ -7,7 +7,7 @@ body { margin-left:   20%;
 @import url(http://fonts.googleapis.com/css?family=EB+Garamond);
 /* @import url(http://fonts.googleapis.com/css?family=Rambla|Caudex|Puritan|Mako|Lato|Sorts+Mill+Goudy|PT+Serif|Marcellus|Libre+Baskerville|Esteban|Averia+Libre|Donegal+One|Lusitana|Alike|Shanti|Fjord+One); */
 
-html { font-family: EB Garamond; }
+html { font-family: Georgia; }
 h1   { font-family: Droid Sans;
        padding: 2% 1% 2% 1% }
 h2   { padding: 2% 0% 2% 0% }
