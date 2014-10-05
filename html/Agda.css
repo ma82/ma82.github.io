@@ -12,9 +12,10 @@ body { margin-left:   20%;
 
 html { font-family: Georgia; font-size : 120%}
 h1   { font-family: Droid Sans;
-       padding: 2% 1% 2% 1% }
+       padding: 2% 1% 2% 1%;
+       line-height: 120% }
 h2   { font-family: Droid Sans; padding: 2% 0% 2% 0% }
-pre  { font-family: Agda; }
+pre  { font-family: Agda; font-size : 90%}
 
 /* Aspects. */
 .Comment       { color: #B22222 }
