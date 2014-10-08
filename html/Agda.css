@@ -10,10 +10,10 @@ body { margin-left:   20%;
        margin-right:  20%;
        line-height:  110%}
 
-html { font-family: Georgia; font-size : 120%}
+html { font-family: Georgia; font-size : 105%}
 h1   { font-family: Droid Sans;
        padding: 2% 1% 2% 1%;
-       line-height: 120% }
+       line-height: 110% }
 h2   { font-family: Droid Sans; padding: 2% 0% 2% 0% }
 pre  { font-family: Agda; font-size : 90%}
 
