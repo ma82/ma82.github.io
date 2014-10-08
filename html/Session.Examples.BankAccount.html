@@ -4,7 +4,7 @@
 <title>Session.Examples.BankAccount</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta http-equiv="Content-Style-Type" content="text/css"/>
-<link href="Agda.css" rel="stylesheet" type="text/css"/></head><body><p><a href="https://www.gnu.org/licenses/gpl.html">2013-2014 matteo.acerbi@gmail.com</a></p>
+<link href="Agda.css" rel="stylesheet" type="text/css"/></head><body><p><a href="https://www.gnu.org/licenses/gpl.html">2013-2014 Matteo Acerbi</a></p>
 <h2 id="bank-account">Bank account</h2>
 <p>Example from Brady and Hammond's &quot;Correct-by-Construction Concurrency&quot;.</p>
 <p>Reference (unsafe) code:</p>
@@ -24,1531 +24,1515 @@
 }</code></pre>
 <p>Instead of defining safe locking protocols as in the paper, we simply model the memory locations as processes.</p>
 <pre></a
-  ><a name="689" class="Keyword"
+  ><a name="679" class="Keyword"
   >module</a
-  ><a name="695"
+  ><a name="685"
   > </a
-  ><a name="696" href="Session.Examples.BankAccount.html#1" class="Module"
+  ><a name="686" href="Session.Examples.BankAccount.html#1" class="Module"
   >Session.Examples.BankAccount</a
-  ><a name="724"
+  ><a name="714"
   > </a
-  ><a name="725" class="Keyword"
+  ><a name="715" class="Keyword"
   >where</a
-  ><a name="730"
+  ><a name="720"
   >
 
 </a
-  ><a name="732" class="Keyword"
+  ><a name="722" class="Keyword"
   >open</a
-  ><a name="736"
+  ><a name="726"
   > </a
-  ><a name="737" class="Keyword"
+  ><a name="727" class="Keyword"
   >import</a
-  ><a name="743"
+  ><a name="733"
   > </a
-  ><a name="744" href="Base.html#1" class="Module"
-  >Base</a
-  ><a name="748"
+  ><a name="734" href="Control.Concurrent.html#1" class="Module"
+  >Control.Concurrent</a
+  ><a name="752"
+  > </a
+  ><a name="753" class="Symbol"
+  >as</a
+  ><a name="755"
+  > </a
+  ><a name="756" class="Module"
+  >C</a
+  ><a name="757"
   >
 </a
-  ><a name="749" class="Keyword"
+  ><a name="758" class="Keyword"
   >open</a
-  ><a name="753"
+  ><a name="762"
   > </a
-  ><a name="754" class="Keyword"
+  ><a name="763" class="Keyword"
   >import</a
-  ><a name="760"
+  ><a name="769"
   > </a
-  ><a name="761" href="Session.html#1" class="Module"
+  ><a name="770" href="Session.html#1" class="Module"
   >Session</a
-  ><a name="768"
+  ><a name="777"
   >
 </a
-  ><a name="769" class="Keyword"
+  ><a name="778" class="Keyword"
   >open</a
-  ><a name="773"
+  ><a name="782"
   > </a
-  ><a name="774" class="Keyword"
+  ><a name="783" class="Keyword"
   >import</a
-  ><a name="780"
-  > </a
-  ><a name="781" href="Data.Nat.html#1" class="Module"
-  >Data.Nat</a
   ><a name="789"
   > </a
-  ><a name="790" class="Symbol"
-  >as</a
-  ><a name="792"
+  ><a name="790" href="Data.Nat.html#1" class="Module"
+  >Data.Nat</a
+  ><a name="798"
   > </a
-  ><a name="793" class="Module"
+  ><a name="799" class="Symbol"
+  >as</a
+  ><a name="801"
+  > </a
+  ><a name="802" class="Module"
   >&#8469;</a
-  ><a name="794"
+  ><a name="803"
   >
 </a
-  ><a name="795" class="Keyword"
+  ><a name="804" class="Keyword"
   >open</a
-  ><a name="799"
+  ><a name="808"
   > </a
-  ><a name="800" class="Keyword"
+  ><a name="809" class="Keyword"
   >import</a
-  ><a name="806"
+  ><a name="815"
   > </a
-  ><a name="807" href="IO.Primitive.html#1" class="Module"
+  ><a name="816" href="IO.Primitive.html#1" class="Module"
   >IO.Primitive</a
-  ><a name="819"
+  ><a name="828"
   ></pre>
 
 <pre></a
-  ><a name="845" href="Session.Examples.BankAccount.html#845" class="Function"
+  ><a name="854" href="Session.Examples.BankAccount.html#854" class="Function"
   >moveMoney</a
-  ><a name="854"
-  > </a
-  ><a name="855" class="Symbol"
-  >:</a
-  ><a name="856"
-  > </a
-  ><a name="857" class="Symbol"
-  >(</a
-  ><a name="858" href="Session.Examples.BankAccount.html#858" class="Bound"
-  >sum</a
-  ><a name="861"
-  > </a
-  ><a name="862" class="Symbol"
-  >:</a
   ><a name="863"
   > </a
-  ><a name="864" href="Data.Nat.html#698" class="Datatype"
-  >&#8469;</a
-  ><a name="865" class="Symbol"
-  >)</a
-  ><a name="866"
+  ><a name="864" class="Symbol"
+  >:</a
+  ><a name="865"
   > </a
-  ><a name="867" class="Symbol"
+  ><a name="866" class="Symbol"
+  >(</a
+  ><a name="867" href="Session.Examples.BankAccount.html#867" class="Bound"
+  >sum</a
+  ><a name="870"
+  > </a
+  ><a name="871" class="Symbol"
+  >:</a
+  ><a name="872"
+  > </a
+  ><a name="873" href="Data.Nat.html#663" class="Datatype"
+  >&#8469;</a
+  ><a name="874" class="Symbol"
+  >)</a
+  ><a name="875"
+  > </a
+  ><a name="876" class="Symbol"
   >&#8594;</a
-  ><a name="868"
+  ><a name="877"
   >
             </a
-  ><a name="881" href="Data.List.html#696" class="InductiveConstructor"
+  ><a name="890" href="Data.List.html#696" class="InductiveConstructor"
   >[]</a
-  ><a name="883"
+  ><a name="892"
   > </a
-  ><a name="884" href="Data.List.html#711" class="InductiveConstructor Operator"
+  ><a name="893" href="Session.Base.html#424" class="InductiveConstructor Operator"
   >&#8759;</a
-  ><a name="885"
+  ><a name="894"
   > </a
-  ><a name="886" class="Symbol"
+  ><a name="895" class="Symbol"
   >(</a
-  ><a name="887" href="Data.Product.html#509" class="InductiveConstructor Operator"
+  ><a name="896" href="Session.html#7002" class="InductiveConstructor Operator"
   >&#187;&#187;</a
-  ><a name="889"
+  ><a name="898"
   > </a
-  ><a name="890" class="Symbol"
+  ><a name="899" class="Symbol"
   >(</a
-  ><a name="891" href="Session.html#199" class="Function"
+  ><a name="900" href="Session.html#1990" class="Function"
   >De</a
-  ><a name="893"
+  ><a name="902"
   > </a
-  ><a name="894" href="Base.html#136" class="Record"
+  ><a name="903" href="Session.Base.html#220" class="Record"
   >&#8868;</a
-  ><a name="895"
+  ><a name="904"
   > </a
-  ><a name="896" href="Function.html#2475" class="Function Operator"
+  ><a name="905" href="Function.html#2481" class="Function Operator"
   >&#8715;</a
-  ><a name="897"
+  ><a name="906"
   > </a
-  ><a name="898" href="Session.html#825" class="Function"
+  ><a name="907" href="Session.html#2755" class="Function"
   >`&#928;^</a
-  ><a name="901"
+  ><a name="910"
   > </a
-  ><a name="902" href="Data.Nat.html#698" class="Datatype"
+  ><a name="911" href="Data.Nat.html#663" class="Datatype"
   >&#8469;</a
-  ><a name="903"
+  ><a name="912"
   > </a
-  ><a name="904" class="Symbol"
+  ><a name="913" class="Symbol"
   >&#955;</a
-  ><a name="905"
+  ><a name="914"
   > </a
-  ><a name="906" href="Session.Examples.BankAccount.html#906" class="Bound"
+  ><a name="915" href="Session.Examples.BankAccount.html#915" class="Bound"
   >_</a
-  ><a name="907"
+  ><a name="916"
   > </a
-  ><a name="908" class="Symbol"
+  ><a name="917" class="Symbol"
   >&#8594;</a
-  ><a name="909"
+  ><a name="918"
   > </a
-  ><a name="910" href="Session.html#821" class="Function"
+  ><a name="919" href="Session.html#2751" class="Function"
   >`&#931;^</a
-  ><a name="913"
-  > </a
-  ><a name="914" class="Symbol"
-  >(</a
-  ><a name="915" href="Data.Maybe.Core.html#315" class="Datatype"
-  >1+</a
-  ><a name="917"
-  > </a
-  ><a name="918" href="Data.Nat.html#698" class="Datatype"
-  >&#8469;</a
-  ><a name="919" class="Symbol"
-  >)</a
-  ><a name="920"
-  > </a
-  ><a name="921" class="Symbol"
-  >&#955;</a
   ><a name="922"
   > </a
-  ><a name="923" href="Session.Examples.BankAccount.html#923" class="Bound"
-  >_</a
-  ><a name="924"
-  > </a
-  ><a name="925" class="Symbol"
-  >&#8594;</a
+  ><a name="923" class="Symbol"
+  >(</a
+  ><a name="924" href="Data.Maybe.Core.html#315" class="Datatype"
+  >1+</a
   ><a name="926"
   > </a
-  ><a name="927" href="Session.html#321" class="InductiveConstructor"
-  >`I</a
+  ><a name="927" href="Data.Nat.html#663" class="Datatype"
+  >&#8469;</a
+  ><a name="928" class="Symbol"
+  >)</a
   ><a name="929"
   > </a
-  ><a name="930" href="Base.html#168" class="InductiveConstructor"
+  ><a name="930" class="Symbol"
+  >&#955;</a
+  ><a name="931"
+  > </a
+  ><a name="932" href="Session.Examples.BankAccount.html#932" class="Bound"
+  >_</a
+  ><a name="933"
+  > </a
+  ><a name="934" class="Symbol"
+  >&#8594;</a
+  ><a name="935"
+  > </a
+  ><a name="936" href="Session.html#2158" class="InductiveConstructor"
+  >`I</a
+  ><a name="938"
+  > </a
+  ><a name="939" class="InductiveConstructor"
   >tt</a
-  ><a name="932" class="Symbol"
+  ><a name="941" class="Symbol"
   >))</a
-  ><a name="934"
+  ><a name="943"
   >
                </a
-  ><a name="950" href="Data.List.html#711" class="InductiveConstructor Operator"
+  ><a name="959" href="Session.Base.html#424" class="InductiveConstructor Operator"
   >&#8759;</a
-  ><a name="951"
+  ><a name="960"
   > </a
-  ><a name="952" class="Symbol"
+  ><a name="961" class="Symbol"
   >(</a
-  ><a name="953" href="Data.Product.html#509" class="InductiveConstructor Operator"
+  ><a name="962" href="Session.html#7002" class="InductiveConstructor Operator"
   >&#187;&#187;</a
-  ><a name="955"
+  ><a name="964"
   > </a
-  ><a name="956" class="Symbol"
+  ><a name="965" class="Symbol"
   >(</a
-  ><a name="957" href="Session.html#199" class="Function"
+  ><a name="966" href="Session.html#1990" class="Function"
   >De</a
-  ><a name="959"
+  ><a name="968"
   > </a
-  ><a name="960" href="Base.html#136" class="Record"
+  ><a name="969" href="Session.Base.html#220" class="Record"
   >&#8868;</a
-  ><a name="961"
+  ><a name="970"
   > </a
-  ><a name="962" href="Function.html#2475" class="Function Operator"
+  ><a name="971" href="Function.html#2481" class="Function Operator"
   >&#8715;</a
-  ><a name="963"
+  ><a name="972"
   > </a
-  ><a name="964" href="Session.html#825" class="Function"
+  ><a name="973" href="Session.html#2755" class="Function"
   >`&#928;^</a
-  ><a name="967"
+  ><a name="976"
   > </a
-  ><a name="968" href="Data.Nat.html#698" class="Datatype"
+  ><a name="977" href="Data.Nat.html#663" class="Datatype"
   >&#8469;</a
-  ><a name="969"
+  ><a name="978"
   > </a
-  ><a name="970" class="Symbol"
+  ><a name="979" class="Symbol"
   >&#955;</a
-  ><a name="971"
+  ><a name="980"
   > </a
-  ><a name="972" href="Session.Examples.BankAccount.html#972" class="Bound"
+  ><a name="981" href="Session.Examples.BankAccount.html#981" class="Bound"
   >_</a
-  ><a name="973"
+  ><a name="982"
   > </a
-  ><a name="974" class="Symbol"
+  ><a name="983" class="Symbol"
   >&#8594;</a
-  ><a name="975"
+  ><a name="984"
   > </a
-  ><a name="976" href="Session.html#821" class="Function"
+  ><a name="985" href="Session.html#2751" class="Function"
   >`&#931;^</a
-  ><a name="979"
-  > </a
-  ><a name="980" class="Symbol"
-  >(</a
-  ><a name="981" href="Data.Maybe.Core.html#315" class="Datatype"
-  >1+</a
-  ><a name="983"
-  > </a
-  ><a name="984" href="Data.Nat.html#698" class="Datatype"
-  >&#8469;</a
-  ><a name="985" class="Symbol"
-  >)</a
-  ><a name="986"
-  > </a
-  ><a name="987" class="Symbol"
-  >&#955;</a
   ><a name="988"
   > </a
-  ><a name="989" href="Session.Examples.BankAccount.html#989" class="Bound"
-  >_</a
-  ><a name="990"
-  > </a
-  ><a name="991" class="Symbol"
-  >&#8594;</a
+  ><a name="989" class="Symbol"
+  >(</a
+  ><a name="990" href="Data.Maybe.Core.html#315" class="Datatype"
+  >1+</a
   ><a name="992"
   > </a
-  ><a name="993" href="Session.html#321" class="InductiveConstructor"
-  >`I</a
+  ><a name="993" href="Data.Nat.html#663" class="Datatype"
+  >&#8469;</a
+  ><a name="994" class="Symbol"
+  >)</a
   ><a name="995"
   > </a
-  ><a name="996" href="Base.html#168" class="InductiveConstructor"
+  ><a name="996" class="Symbol"
+  >&#955;</a
+  ><a name="997"
+  > </a
+  ><a name="998" href="Session.Examples.BankAccount.html#998" class="Bound"
+  >_</a
+  ><a name="999"
+  > </a
+  ><a name="1000" class="Symbol"
+  >&#8594;</a
+  ><a name="1001"
+  > </a
+  ><a name="1002" href="Session.html#2158" class="InductiveConstructor"
+  >`I</a
+  ><a name="1004"
+  > </a
+  ><a name="1005" class="InductiveConstructor"
   >tt</a
-  ><a name="998" class="Symbol"
+  ><a name="1007" class="Symbol"
   >))</a
-  ><a name="1000"
+  ><a name="1009"
   >
             </a
-  ><a name="1013" href="Session.html#12647" class="Function Operator"
+  ><a name="1022" href="Session.html#18617" class="Function Operator"
   >[IO</a
-  ><a name="1016"
+  ><a name="1025"
   > </a
-  ><a name="1017" href="Base.html#136" class="Record"
+  ><a name="1026" href="Session.Base.html#220" class="Record"
   >&#8868;</a
-  ><a name="1018"
+  ><a name="1027"
   > </a
-  ><a name="1019" href="Session.html#12647" class="Function Operator"
+  ><a name="1028" href="Session.html#18617" class="Function Operator"
   >]&gt;</a
-  ><a name="1021"
+  ><a name="1030"
   >
             </a
-  ><a name="1034" href="Data.List.html#696" class="InductiveConstructor"
+  ><a name="1043" href="Data.List.html#696" class="InductiveConstructor"
   >[]</a
-  ><a name="1036"
+  ><a name="1045"
   >
 </a
-  ><a name="1037" href="Session.Examples.BankAccount.html#845" class="Function"
+  ><a name="1046" href="Session.Examples.BankAccount.html#854" class="Function"
   >moveMoney</a
-  ><a name="1046"
+  ><a name="1055"
   > </a
-  ><a name="1047" href="Session.Examples.BankAccount.html#1047" class="Bound"
+  ><a name="1056" href="Session.Examples.BankAccount.html#1056" class="Bound"
   >sum</a
-  ><a name="1050"
+  ><a name="1059"
   > </a
-  ><a name="1051" class="Symbol"
+  ><a name="1060" class="Symbol"
   >=</a
-  ><a name="1052"
+  ><a name="1061"
   > </a
-  ><a name="1053" href="Session.html#11699" class="Function"
+  ><a name="1062" href="Session.html#17397" class="Function"
   >get</a
-  ><a name="1056"
+  ><a name="1065"
   > </a
-  ><a name="1057" class="Symbol"
+  ><a name="1066" class="Symbol"
   >(</a
-  ><a name="1058" href="Data.List.Any.html#1222" class="InductiveConstructor Operator"
+  ><a name="1067" href="Data.List.Any.html#1222" class="InductiveConstructor Operator"
   >S&gt;</a
-  ><a name="1060"
+  ><a name="1069"
   > </a
-  ><a name="1061" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  ><a name="1070" href="Session.Base.html#2899" class="InductiveConstructor"
   >Z|</a
-  ><a name="1063" class="Symbol"
+  ><a name="1072" class="Symbol"
   >)</a
-  ><a name="1064"
+  ><a name="1073"
   > </a
-  ><a name="1065" class="Symbol"
+  ><a name="1074" class="Symbol"
   >&#955;</a
-  ><a name="1066"
+  ><a name="1075"
   > </a
-  ><a name="1067" href="Session.Examples.BankAccount.html#1067" class="Bound"
+  ><a name="1076" href="Session.Examples.BankAccount.html#1076" class="Bound"
   >sendFunds</a
-  ><a name="1076"
+  ><a name="1085"
   > </a
-  ><a name="1077" class="Symbol"
+  ><a name="1086" class="Symbol"
   >&#8594;</a
-  ><a name="1078"
+  ><a name="1087"
   > 
                 </a
-  ><a name="1096" href="Session.html#11699" class="Function"
+  ><a name="1105" href="Session.html#17397" class="Function"
   >get</a
-  ><a name="1099"
+  ><a name="1108"
   > </a
-  ><a name="1100" class="Symbol"
+  ><a name="1109" class="Symbol"
   >(</a
-  ><a name="1101"
+  ><a name="1110"
   >   </a
-  ><a name="1104" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  ><a name="1113" href="Session.Base.html#2899" class="InductiveConstructor"
   >Z|</a
-  ><a name="1106" class="Symbol"
+  ><a name="1115" class="Symbol"
   >)</a
-  ><a name="1107"
+  ><a name="1116"
   > </a
-  ><a name="1108" class="Symbol"
+  ><a name="1117" class="Symbol"
   >&#955;</a
-  ><a name="1109"
+  ><a name="1118"
   > </a
-  ><a name="1110" href="Session.Examples.BankAccount.html#1110" class="Bound"
+  ><a name="1119" href="Session.Examples.BankAccount.html#1119" class="Bound"
   >recvFunds</a
-  ><a name="1119"
+  ><a name="1128"
   > </a
-  ><a name="1120" class="Symbol"
+  ><a name="1129" class="Symbol"
   >&#8594;</a
-  ><a name="1121"
+  ><a name="1130"
   > 
                 </a
-  ><a name="1139" href="Session.Examples.BankAccount.html#1357" class="Function"
+  ><a name="1148" href="Session.Examples.BankAccount.html#1366" class="Function"
   >respond</a
-  ><a name="1146"
+  ><a name="1155"
   > </a
-  ><a name="1147" href="Session.Examples.BankAccount.html#1047" class="Bound"
+  ><a name="1156" href="Session.Examples.BankAccount.html#1056" class="Bound"
   >sum</a
-  ><a name="1150"
+  ><a name="1159"
   > </a
-  ><a name="1151" href="Session.Examples.BankAccount.html#1067" class="Bound"
+  ><a name="1160" href="Session.Examples.BankAccount.html#1076" class="Bound"
   >sendFunds</a
-  ><a name="1160"
+  ><a name="1169"
   > </a
-  ><a name="1161" href="Session.Examples.BankAccount.html#1110" class="Bound"
+  ><a name="1170" href="Session.Examples.BankAccount.html#1119" class="Bound"
   >recvFunds</a
-  ><a name="1170"
+  ><a name="1179"
   > </a
-  ><a name="1171" class="Keyword"
+  ><a name="1180" class="Keyword"
   >where</a
-  ><a name="1176"
+  ><a name="1185"
   >
   </a
-  ><a name="1179" href="Session.Examples.BankAccount.html#1179" class="Function"
+  ><a name="1188" href="Session.Examples.BankAccount.html#1188" class="Function"
   >success</a
-  ><a name="1186"
+  ><a name="1195"
   > </a
-  ><a name="1187" class="Symbol"
+  ><a name="1196" class="Symbol"
   >:</a
-  ><a name="1188"
+  ><a name="1197"
   > </a
-  ><a name="1189" href="Data.Nat.html#698" class="Datatype"
+  ><a name="1198" href="Data.Nat.html#663" class="Datatype"
   >&#8469;</a
-  ><a name="1190"
+  ><a name="1199"
   > </a
-  ><a name="1191" class="Symbol"
+  ><a name="1200" class="Symbol"
   >&#8594;</a
-  ><a name="1192"
+  ><a name="1201"
   > </a
-  ><a name="1193" href="Data.Nat.html#698" class="Datatype"
+  ><a name="1202" href="Data.Nat.html#663" class="Datatype"
   >&#8469;</a
-  ><a name="1194"
+  ><a name="1203"
   > </a
-  ><a name="1195" class="Symbol"
+  ><a name="1204" class="Symbol"
   >&#8594;</a
-  ><a name="1196"
+  ><a name="1205"
   > </a
-  ><a name="1197" href="Data.Nat.html#698" class="Datatype"
+  ><a name="1206" href="Data.Nat.html#663" class="Datatype"
   >&#8469;</a
-  ><a name="1198"
+  ><a name="1207"
   > </a
-  ><a name="1199" class="Symbol"
+  ><a name="1208" class="Symbol"
   >&#8594;</a
-  ><a name="1200"
+  ><a name="1209"
   > </a
-  ><a name="1201" class="Symbol"
+  ><a name="1210" class="Symbol"
   >_</a
-  ><a name="1202"
+  ><a name="1211"
   >
   </a
-  ><a name="1205" href="Session.Examples.BankAccount.html#1179" class="Function"
+  ><a name="1214" href="Session.Examples.BankAccount.html#1188" class="Function"
   >success</a
-  ><a name="1212"
+  ><a name="1221"
   > </a
-  ><a name="1213" href="Session.Examples.BankAccount.html#1213" class="Bound"
+  ><a name="1222" href="Session.Examples.BankAccount.html#1222" class="Bound"
   >sum</a
-  ><a name="1216"
+  ><a name="1225"
   > </a
-  ><a name="1217" href="Session.Examples.BankAccount.html#1217" class="Bound"
+  ><a name="1226" href="Session.Examples.BankAccount.html#1226" class="Bound"
   >sendFunds</a
-  ><a name="1226"
+  ><a name="1235"
   > </a
-  ><a name="1227" href="Session.Examples.BankAccount.html#1227" class="Bound"
+  ><a name="1236" href="Session.Examples.BankAccount.html#1236" class="Bound"
   >recvFunds</a
-  ><a name="1236"
+  ><a name="1245"
   > </a
-  ><a name="1237" class="Symbol"
+  ><a name="1246" class="Symbol"
   >=</a
-  ><a name="1238"
+  ><a name="1247"
   > </a
-  ><a name="1239" href="Session.html#11490" class="Function"
+  ><a name="1248" href="Session.html#17203" class="Function"
   >put</a
-  ><a name="1242"
+  ><a name="1251"
   > </a
-  ><a name="1243" class="Symbol"
+  ><a name="1252" class="Symbol"
   >(</a
-  ><a name="1244" href="Data.List.Any.html#1222" class="InductiveConstructor Operator"
+  ><a name="1253" href="Data.List.Any.html#1222" class="InductiveConstructor Operator"
   >S&gt;</a
-  ><a name="1246"
+  ><a name="1255"
   > </a
-  ><a name="1247" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  ><a name="1256" href="Session.Base.html#2899" class="InductiveConstructor"
   >Z|</a
-  ><a name="1249" class="Symbol"
+  ><a name="1258" class="Symbol"
   >)</a
-  ><a name="1250"
+  ><a name="1259"
   > </a
-  ><a name="1251" class="Symbol"
+  ><a name="1260" class="Symbol"
   >(</a
-  ><a name="1252" href="Data.Maybe.Core.html#353" class="InductiveConstructor"
+  ><a name="1261" href="Data.Maybe.Core.html#353" class="InductiveConstructor"
   >&gt;</a
-  ><a name="1253"
+  ><a name="1262"
   > </a
-  ><a name="1254" href="Session.Examples.BankAccount.html#1217" class="Bound"
+  ><a name="1263" href="Session.Examples.BankAccount.html#1226" class="Bound"
   >sendFunds</a
-  ><a name="1263" class="Symbol"
+  ><a name="1272" class="Symbol"
   >)</a
-  ><a name="1264"
+  ><a name="1273"
   > </a
-  ><a name="1265" href="Session.html#11371" class="Function Operator"
+  ><a name="1274" href="Session.html#16926" class="Function Operator"
   >&#187;</a
-  ><a name="1266"
+  ><a name="1275"
   > </a
-  ><a name="1267" href="Session.html#9609" class="InductiveConstructor Operator"
+  ><a name="1276" href="Session.html#16198" class="InductiveConstructor"
   >end</a
-  ><a name="1270"
+  ><a name="1279"
   > </a
-  ><a name="1271" class="Symbol"
+  ><a name="1280" class="Symbol"
   >(</a
-  ><a name="1272" href="Data.List.Any.html#1222" class="InductiveConstructor Operator"
+  ><a name="1281" href="Data.List.Any.html#1222" class="InductiveConstructor Operator"
   >S&gt;</a
-  ><a name="1274"
+  ><a name="1283"
   > </a
-  ><a name="1275" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  ><a name="1284" href="Session.Base.html#2899" class="InductiveConstructor"
   >Z|</a
-  ><a name="1277" class="Symbol"
+  ><a name="1286" class="Symbol"
   >)</a
-  ><a name="1278"
+  ><a name="1287"
   >
                                   </a
-  ><a name="1313" href="Session.html#11371" class="Function Operator"
+  ><a name="1322" href="Session.html#16926" class="Function Operator"
   >&#187;</a
-  ><a name="1314"
+  ><a name="1323"
   > </a
-  ><a name="1315" href="Session.html#11490" class="Function"
+  ><a name="1324" href="Session.html#17203" class="Function"
   >put</a
-  ><a name="1318"
+  ><a name="1327"
   >     </a
-  ><a name="1323" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  ><a name="1332" href="Session.Base.html#2899" class="InductiveConstructor"
   >Z|</a
-  ><a name="1325"
+  ><a name="1334"
   >  </a
-  ><a name="1327" class="Symbol"
+  ><a name="1336" class="Symbol"
   >(</a
-  ><a name="1328" href="Data.Maybe.Core.html#353" class="InductiveConstructor"
+  ><a name="1337" href="Data.Maybe.Core.html#353" class="InductiveConstructor"
   >&gt;</a
-  ><a name="1329"
+  ><a name="1338"
   > </a
-  ><a name="1330" href="Session.Examples.BankAccount.html#1227" class="Bound"
+  ><a name="1339" href="Session.Examples.BankAccount.html#1236" class="Bound"
   >recvFunds</a
-  ><a name="1339" class="Symbol"
+  ><a name="1348" class="Symbol"
   >)</a
-  ><a name="1340"
+  ><a name="1349"
   > </a
-  ><a name="1341" href="Session.html#11371" class="Function Operator"
+  ><a name="1350" href="Session.html#16926" class="Function Operator"
   >&#187;</a
-  ><a name="1342"
+  ><a name="1351"
   > </a
-  ><a name="1343" href="Session.html#9609" class="InductiveConstructor Operator"
+  ><a name="1352" href="Session.html#16198" class="InductiveConstructor"
   >end</a
-  ><a name="1346"
+  ><a name="1355"
   >     </a
-  ><a name="1351" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  ><a name="1360" href="Session.Base.html#2899" class="InductiveConstructor"
   >Z|</a
-  ><a name="1353"
+  ><a name="1362"
   > 
   </a
-  ><a name="1357" href="Session.Examples.BankAccount.html#1357" class="Function"
+  ><a name="1366" href="Session.Examples.BankAccount.html#1366" class="Function"
   >respond</a
-  ><a name="1364"
+  ><a name="1373"
   > </a
-  ><a name="1365" class="Symbol"
+  ><a name="1374" class="Symbol"
   >:</a
-  ><a name="1366"
+  ><a name="1375"
   > </a
-  ><a name="1367" href="Data.Nat.html#698" class="Datatype"
+  ><a name="1376" href="Data.Nat.html#663" class="Datatype"
   >&#8469;</a
-  ><a name="1368"
+  ><a name="1377"
   > </a
-  ><a name="1369" class="Symbol"
+  ><a name="1378" class="Symbol"
   >&#8594;</a
-  ><a name="1370"
+  ><a name="1379"
   > </a
-  ><a name="1371" href="Data.Nat.html#698" class="Datatype"
+  ><a name="1380" href="Data.Nat.html#663" class="Datatype"
   >&#8469;</a
-  ><a name="1372"
+  ><a name="1381"
   > </a
-  ><a name="1373" class="Symbol"
+  ><a name="1382" class="Symbol"
   >&#8594;</a
-  ><a name="1374"
+  ><a name="1383"
   > </a
-  ><a name="1375" href="Data.Nat.html#698" class="Datatype"
+  ><a name="1384" href="Data.Nat.html#663" class="Datatype"
   >&#8469;</a
-  ><a name="1376"
+  ><a name="1385"
   > </a
-  ><a name="1377" class="Symbol"
+  ><a name="1386" class="Symbol"
   >&#8594;</a
-  ><a name="1378"
+  ><a name="1387"
   > </a
-  ><a name="1379" class="Symbol"
+  ><a name="1388" class="Symbol"
   >_</a
-  ><a name="1380"
+  ><a name="1389"
   >
   </a
-  ><a name="1383" href="Session.Examples.BankAccount.html#1357" class="Function"
+  ><a name="1392" href="Session.Examples.BankAccount.html#1366" class="Function"
   >respond</a
-  ><a name="1390"
+  ><a name="1399"
   > </a
-  ><a name="1391" href="Session.Examples.BankAccount.html#1391" class="Bound"
+  ><a name="1400" href="Session.Examples.BankAccount.html#1400" class="Bound"
   >sum</a
-  ><a name="1394"
+  ><a name="1403"
   >  </a
-  ><a name="1396" href="Session.Examples.BankAccount.html#1396" class="Bound"
+  ><a name="1405" href="Session.Examples.BankAccount.html#1405" class="Bound"
   >sendFunds</a
-  ><a name="1405"
+  ><a name="1414"
   > </a
-  ><a name="1406" href="Session.Examples.BankAccount.html#1406" class="Bound"
+  ><a name="1415" href="Session.Examples.BankAccount.html#1415" class="Bound"
   >recvFunds</a
-  ><a name="1415"
+  ><a name="1424"
   > </a
-  ><a name="1416" class="Keyword"
+  ><a name="1425" class="Keyword"
   >with</a
-  ><a name="1420"
+  ><a name="1429"
   > </a
-  ><a name="1421" href="Data.Nat.html#3791" class="Function"
+  ><a name="1430" href="Data.Nat.html#3781" class="Function"
   >compare</a
-  ><a name="1428"
+  ><a name="1437"
   > </a
-  ><a name="1429" href="Session.Examples.BankAccount.html#1396" class="Bound"
+  ><a name="1438" href="Session.Examples.BankAccount.html#1405" class="Bound"
   >sendFunds</a
-  ><a name="1438"
+  ><a name="1447"
   > </a
-  ><a name="1439" href="Session.Examples.BankAccount.html#1391" class="Bound"
+  ><a name="1448" href="Session.Examples.BankAccount.html#1400" class="Bound"
   >sum</a
-  ><a name="1442"
+  ><a name="1451"
   > </a
-  ><a name="1443" class="Comment"
+  ><a name="1452" class="Comment"
   >-- TODO &#8804;?</a
-  ><a name="1453"
+  ><a name="1462"
   >
   </a
-  ><a name="1456" href="Session.Examples.BankAccount.html#1357" class="Function"
+  ><a name="1465" href="Session.Examples.BankAccount.html#1366" class="Function"
   >respond</a
-  ><a name="1463"
+  ><a name="1472"
   > </a
-  ><a name="1464" class="DottedPattern Symbol"
+  ><a name="1473" class="DottedPattern Symbol"
   >._</a
-  ><a name="1466"
+  ><a name="1475"
   >   </a
-  ><a name="1469" href="Session.Examples.BankAccount.html#1469" class="Bound"
+  ><a name="1478" href="Session.Examples.BankAccount.html#1478" class="Bound"
   >sendFunds</a
-  ><a name="1478"
+  ><a name="1487"
   > </a
-  ><a name="1479" href="Session.Examples.BankAccount.html#1479" class="Bound"
+  ><a name="1488" href="Session.Examples.BankAccount.html#1488" class="Bound"
   >recvFunds</a
-  ><a name="1488"
+  ><a name="1497"
   > </a
-  ><a name="1489" class="Symbol"
+  ><a name="1498" class="Symbol"
   >|</a
-  ><a name="1490"
+  ><a name="1499"
   > </a
-  ><a name="1491" href="Data.Nat.html#3669" class="InductiveConstructor"
+  ><a name="1500" href="Data.Nat.html#3659" class="InductiveConstructor"
   >less</a
-  ><a name="1495"
+  ><a name="1504"
   >    </a
-  ><a name="1499" class="DottedPattern Symbol"
+  ><a name="1508" class="DottedPattern Symbol"
   >._</a
-  ><a name="1501"
+  ><a name="1510"
   > </a
-  ><a name="1502" href="Session.Examples.BankAccount.html#1502" class="Bound"
+  ><a name="1511" href="Session.Examples.BankAccount.html#1511" class="Bound"
   >k</a
-  ><a name="1503"
+  ><a name="1512"
   > </a
-  ><a name="1504" class="Symbol"
+  ><a name="1513" class="Symbol"
   >=</a
-  ><a name="1505"
+  ><a name="1514"
   > </a
-  ><a name="1506" href="Session.html#9533" class="InductiveConstructor Operator"
+  ><a name="1515" href="Session.html#14662" class="InductiveConstructor Operator"
   >&#8657;</a
-  ><a name="1507"
-  > </a
-  ><a name="1508" href="IO.Primitive.html#1501" class="Postulate"
-  >putStrLn</a
   ><a name="1516"
   > </a
-  ><a name="1517" href="Base.html#4675" class="Function Operator"
+  ><a name="1517" href="IO.Primitive.html#1501" class="Postulate"
+  >putStrLn</a
+  ><a name="1525"
+  > </a
+  ><a name="1526" href="Session.Base.html#4681" class="Function Operator"
   >&#171;</a
-  ><a name="1518"
+  ><a name="1527"
   > </a
-  ><a name="1519" class="String"
+  ><a name="1528" class="String"
   >&quot;Insufficient funds&quot;</a
-  ><a name="1539"
+  ><a name="1548"
   > </a
-  ><a name="1540" href="Base.html#4675" class="Function Operator"
+  ><a name="1549" href="Session.Base.html#4681" class="Function Operator"
   >&#187;</a
-  ><a name="1541"
+  ><a name="1550"
   >
                                                   </a
-  ><a name="1592" href="Session.html#11371" class="Function Operator"
+  ><a name="1601" href="Session.html#16926" class="Function Operator"
   >&#187;</a
-  ><a name="1593"
-  > </a
-  ><a name="1594" href="Session.html#11490" class="Function"
-  >put</a
-  ><a name="1597"
-  >  </a
-  ><a name="1599" class="Symbol"
-  >(</a
-  ><a name="1600" href="Data.List.Any.html#1222" class="InductiveConstructor Operator"
-  >S&gt;</a
   ><a name="1602"
   > </a
-  ><a name="1603" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
-  >Z|</a
-  ><a name="1605" class="Symbol"
-  >)</a
+  ><a name="1603" href="Session.html#17203" class="Function"
+  >put</a
   ><a name="1606"
-  > </a
-  ><a name="1607" href="Data.Maybe.Core.html#383" class="InductiveConstructor"
-  >&#949;</a
-  ><a name="1608"
-  > </a
-  ><a name="1609" href="Session.html#11371" class="Function Operator"
-  >&#187;</a
-  ><a name="1610"
-  > </a
-  ><a name="1611" href="Session.html#9609" class="InductiveConstructor Operator"
-  >end</a
-  ><a name="1614"
-  > </a
-  ><a name="1615" class="Symbol"
+  >  </a
+  ><a name="1608" class="Symbol"
   >(</a
-  ><a name="1616" href="Data.List.Any.html#1222" class="InductiveConstructor Operator"
+  ><a name="1609" href="Data.List.Any.html#1222" class="InductiveConstructor Operator"
   >S&gt;</a
-  ><a name="1618"
+  ><a name="1611"
   > </a
-  ><a name="1619" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  ><a name="1612" href="Session.Base.html#2899" class="InductiveConstructor"
   >Z|</a
-  ><a name="1621" class="Symbol"
+  ><a name="1614" class="Symbol"
   >)</a
-  ><a name="1622"
+  ><a name="1615"
+  > </a
+  ><a name="1616" href="Data.Maybe.Core.html#383" class="InductiveConstructor"
+  >&#949;</a
+  ><a name="1617"
+  > </a
+  ><a name="1618" href="Session.html#16926" class="Function Operator"
+  >&#187;</a
+  ><a name="1619"
+  > </a
+  ><a name="1620" href="Session.html#16198" class="InductiveConstructor"
+  >end</a
+  ><a name="1623"
+  > </a
+  ><a name="1624" class="Symbol"
+  >(</a
+  ><a name="1625" href="Data.List.Any.html#1222" class="InductiveConstructor Operator"
+  >S&gt;</a
+  ><a name="1627"
+  > </a
+  ><a name="1628" href="Session.Base.html#2899" class="InductiveConstructor"
+  >Z|</a
+  ><a name="1630" class="Symbol"
+  >)</a
+  ><a name="1631"
   >
                                                   </a
-  ><a name="1673" href="Session.html#11371" class="Function Operator"
+  ><a name="1682" href="Session.html#16926" class="Function Operator"
   >&#187;</a
-  ><a name="1674"
+  ><a name="1683"
   > </a
-  ><a name="1675" href="Session.html#11490" class="Function"
+  ><a name="1684" href="Session.html#17203" class="Function"
   >put</a
-  ><a name="1678"
+  ><a name="1687"
   >      </a
-  ><a name="1684" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  ><a name="1693" href="Session.Base.html#2899" class="InductiveConstructor"
   >Z|</a
-  ><a name="1686"
-  >  </a
-  ><a name="1688" href="Data.Maybe.Core.html#383" class="InductiveConstructor"
-  >&#949;</a
-  ><a name="1689"
-  > </a
-  ><a name="1690" href="Session.html#11371" class="Function Operator"
-  >&#187;</a
-  ><a name="1691"
-  > </a
-  ><a name="1692" href="Session.html#9609" class="InductiveConstructor Operator"
-  >end</a
   ><a name="1695"
+  >  </a
+  ><a name="1697" href="Data.Maybe.Core.html#383" class="InductiveConstructor"
+  >&#949;</a
+  ><a name="1698"
+  > </a
+  ><a name="1699" href="Session.html#16926" class="Function Operator"
+  >&#187;</a
+  ><a name="1700"
+  > </a
+  ><a name="1701" href="Session.html#16198" class="InductiveConstructor"
+  >end</a
+  ><a name="1704"
   >     </a
-  ><a name="1700" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  ><a name="1709" href="Session.Base.html#2899" class="InductiveConstructor"
   >Z|</a
-  ><a name="1702"
+  ><a name="1711"
   > 
   </a
-  ><a name="1706" href="Session.Examples.BankAccount.html#1357" class="Function"
+  ><a name="1715" href="Session.Examples.BankAccount.html#1366" class="Function"
   >respond</a
-  ><a name="1713"
+  ><a name="1722"
   > </a
-  ><a name="1714" href="Session.Examples.BankAccount.html#1714" class="Bound"
+  ><a name="1723" href="Session.Examples.BankAccount.html#1723" class="Bound"
   >sum</a
-  ><a name="1717"
+  ><a name="1726"
   >  </a
-  ><a name="1719" class="DottedPattern Symbol"
+  ><a name="1728" class="DottedPattern Symbol"
   >._</a
-  ><a name="1721"
+  ><a name="1730"
   >        </a
-  ><a name="1729" href="Session.Examples.BankAccount.html#1729" class="Bound"
+  ><a name="1738" href="Session.Examples.BankAccount.html#1738" class="Bound"
   >recvFunds</a
-  ><a name="1738"
+  ><a name="1747"
   > </a
-  ><a name="1739" class="Symbol"
+  ><a name="1748" class="Symbol"
   >|</a
-  ><a name="1740"
+  ><a name="1749"
   > </a
-  ><a name="1741" href="Data.Nat.html#3714" class="InductiveConstructor"
+  ><a name="1750" href="Data.Nat.html#3704" class="InductiveConstructor"
   >equal</a
-  ><a name="1746"
-  >   </a
-  ><a name="1749" class="DottedPattern Symbol"
-  >._</a
-  ><a name="1751"
-  >   </a
-  ><a name="1754" class="Symbol"
-  >=</a
   ><a name="1755"
+  >   </a
+  ><a name="1758" class="DottedPattern Symbol"
+  >._</a
+  ><a name="1760"
+  >   </a
+  ><a name="1763" class="Symbol"
+  >=</a
+  ><a name="1764"
   > </a
-  ><a name="1756" href="Session.Examples.BankAccount.html#1179" class="Function"
+  ><a name="1765" href="Session.Examples.BankAccount.html#1188" class="Function"
   >success</a
-  ><a name="1763"
+  ><a name="1772"
   > </a
-  ><a name="1764" href="Session.Examples.BankAccount.html#1714" class="Bound"
+  ><a name="1773" href="Session.Examples.BankAccount.html#1723" class="Bound"
   >sum</a
-  ><a name="1767"
+  ><a name="1776"
   >      </a
-  ><a name="1773" class="Number"
+  ><a name="1782" class="Number"
   >0</a
-  ><a name="1774"
+  ><a name="1783"
   >  </a
-  ><a name="1776" class="Symbol"
+  ><a name="1785" class="Symbol"
   >(</a
-  ><a name="1777" href="Session.Examples.BankAccount.html#1714" class="Bound"
+  ><a name="1786" href="Session.Examples.BankAccount.html#1723" class="Bound"
   >sum</a
-  ><a name="1780"
+  ><a name="1789"
   > </a
-  ><a name="1781" href="Data.Nat.html#2178" class="Primitive Operator"
+  ><a name="1790" href="Data.Nat.html#2168" class="Primitive Operator"
   >&#8469;.+</a
-  ><a name="1784"
+  ><a name="1793"
   > </a
-  ><a name="1785" href="Session.Examples.BankAccount.html#1729" class="Bound"
+  ><a name="1794" href="Session.Examples.BankAccount.html#1738" class="Bound"
   >recvFunds</a
-  ><a name="1794" class="Symbol"
+  ><a name="1803" class="Symbol"
   >)</a
-  ><a name="1795"
+  ><a name="1804"
   >
   </a
-  ><a name="1798" href="Session.Examples.BankAccount.html#1357" class="Function"
+  ><a name="1807" href="Session.Examples.BankAccount.html#1366" class="Function"
   >respond</a
-  ><a name="1805"
+  ><a name="1814"
   > </a
-  ><a name="1806" href="Session.Examples.BankAccount.html#1806" class="Bound"
+  ><a name="1815" href="Session.Examples.BankAccount.html#1815" class="Bound"
   >sum</a
-  ><a name="1809"
+  ><a name="1818"
   >  </a
-  ><a name="1811" class="DottedPattern Symbol"
+  ><a name="1820" class="DottedPattern Symbol"
   >._</a
-  ><a name="1813"
+  ><a name="1822"
   >        </a
-  ><a name="1821" href="Session.Examples.BankAccount.html#1821" class="Bound"
+  ><a name="1830" href="Session.Examples.BankAccount.html#1830" class="Bound"
   >recvFunds</a
-  ><a name="1830"
+  ><a name="1839"
   > </a
-  ><a name="1831" class="Symbol"
+  ><a name="1840" class="Symbol"
   >|</a
-  ><a name="1832"
+  ><a name="1841"
   > </a
-  ><a name="1833" href="Data.Nat.html#3747" class="InductiveConstructor"
+  ><a name="1842" href="Data.Nat.html#3737" class="InductiveConstructor"
   >greater</a
-  ><a name="1840"
+  ><a name="1849"
   > </a
-  ><a name="1841" class="DottedPattern Symbol"
+  ><a name="1850" class="DottedPattern Symbol"
   >._</a
-  ><a name="1843"
+  ><a name="1852"
   > </a
-  ><a name="1844" href="Session.Examples.BankAccount.html#1844" class="Bound"
+  ><a name="1853" href="Session.Examples.BankAccount.html#1853" class="Bound"
   >k</a
-  ><a name="1845"
+  ><a name="1854"
   > </a
-  ><a name="1846" class="Symbol"
+  ><a name="1855" class="Symbol"
   >=</a
-  ><a name="1847"
+  ><a name="1856"
   > </a
-  ><a name="1848" href="Session.Examples.BankAccount.html#1179" class="Function"
+  ><a name="1857" href="Session.Examples.BankAccount.html#1188" class="Function"
   >success</a
-  ><a name="1855"
-  > </a
-  ><a name="1856" href="Session.Examples.BankAccount.html#1806" class="Bound"
-  >sum</a
-  ><a name="1859"
-  > </a
-  ><a name="1860" class="Symbol"
-  >(</a
-  ><a name="1861" href="Data.Nat.html#725" class="InductiveConstructor"
-  >suc</a
   ><a name="1864"
   > </a
-  ><a name="1865" href="Session.Examples.BankAccount.html#1844" class="Bound"
-  >k</a
-  ><a name="1866" class="Symbol"
-  >)</a
-  ><a name="1867"
-  > </a
-  ><a name="1868" class="Symbol"
-  >(</a
-  ><a name="1869" href="Session.Examples.BankAccount.html#1806" class="Bound"
+  ><a name="1865" href="Session.Examples.BankAccount.html#1815" class="Bound"
   >sum</a
-  ><a name="1872"
+  ><a name="1868"
   > </a
-  ><a name="1873" href="Data.Nat.html#2178" class="Primitive Operator"
-  >&#8469;.+</a
+  ><a name="1869" class="Symbol"
+  >(</a
+  ><a name="1870" href="Data.Nat.html#690" class="InductiveConstructor"
+  >suc</a
+  ><a name="1873"
+  > </a
+  ><a name="1874" href="Session.Examples.BankAccount.html#1853" class="Bound"
+  >k</a
+  ><a name="1875" class="Symbol"
+  >)</a
   ><a name="1876"
   > </a
-  ><a name="1877" href="Session.Examples.BankAccount.html#1821" class="Bound"
+  ><a name="1877" class="Symbol"
+  >(</a
+  ><a name="1878" href="Session.Examples.BankAccount.html#1815" class="Bound"
+  >sum</a
+  ><a name="1881"
+  > </a
+  ><a name="1882" href="Data.Nat.html#2168" class="Primitive Operator"
+  >&#8469;.+</a
+  ><a name="1885"
+  > </a
+  ><a name="1886" href="Session.Examples.BankAccount.html#1830" class="Bound"
   >recvFunds</a
-  ><a name="1886" class="Symbol"
+  ><a name="1895" class="Symbol"
   >)</a
-  ><a name="1887"
+  ><a name="1896"
   ></pre>
 
 <pre></a
-  ><a name="1913" href="Session.Examples.BankAccount.html#1913" class="Function"
+  ><a name="1922" href="Session.Examples.BankAccount.html#1922" class="Function"
   >fund</a
-  ><a name="1917"
+  ><a name="1926"
   > </a
-  ><a name="1918" class="Symbol"
+  ><a name="1927" class="Symbol"
   >:</a
-  ><a name="1919"
+  ><a name="1928"
   > </a
-  ><a name="1920" class="Symbol"
-  >(</a
-  ><a name="1921" href="Session.Examples.BankAccount.html#1921" class="Bound"
-  >init</a
-  ><a name="1925"
-  > </a
-  ><a name="1926" class="Symbol"
-  >:</a
-  ><a name="1927"
-  > </a
-  ><a name="1928" href="Data.Nat.html#698" class="Datatype"
-  >&#8469;</a
   ><a name="1929" class="Symbol"
-  >)</a
-  ><a name="1930"
+  >(</a
+  ><a name="1930" href="Session.Examples.BankAccount.html#1930" class="Bound"
+  >init</a
+  ><a name="1934"
   > </a
-  ><a name="1931" class="Symbol"
-  >&#8594;</a
-  ><a name="1932"
+  ><a name="1935" class="Symbol"
+  >:</a
+  ><a name="1936"
   > </a
-  ><a name="1933" href="Data.List.html#696" class="InductiveConstructor"
-  >[]</a
-  ><a name="1935"
-  > </a
-  ><a name="1936" href="Data.List.html#711" class="InductiveConstructor Operator"
-  >&#8759;</a
-  ><a name="1937"
-  > </a
+  ><a name="1937" href="Data.Nat.html#663" class="Datatype"
+  >&#8469;</a
   ><a name="1938" class="Symbol"
-  >((</a
-  ><a name="1940" href="Session.html#199" class="Function"
-  >De</a
-  ><a name="1942"
+  >)</a
+  ><a name="1939"
   > </a
-  ><a name="1943" href="Base.html#136" class="Record"
-  >&#8868;</a
+  ><a name="1940" class="Symbol"
+  >&#8594;</a
+  ><a name="1941"
+  > </a
+  ><a name="1942" href="Data.List.html#696" class="InductiveConstructor"
+  >[]</a
   ><a name="1944"
   > </a
-  ><a name="1945" href="Function.html#2475" class="Function Operator"
-  >&#8715;</a
+  ><a name="1945" href="Session.Base.html#424" class="InductiveConstructor Operator"
+  >&#8759;</a
   ><a name="1946"
   > </a
-  ><a name="1947" href="Session.html#825" class="Function"
-  >`&#928;^</a
-  ><a name="1950"
+  ><a name="1947" class="Symbol"
+  >((</a
+  ><a name="1949" href="Session.html#1990" class="Function"
+  >De</a
+  ><a name="1951"
   > </a
-  ><a name="1951" href="Data.Nat.html#698" class="Datatype"
-  >&#8469;</a
-  ><a name="1952"
-  >  </a
-  ><a name="1954" class="Symbol"
-  >&#955;</a
+  ><a name="1952" href="Session.Base.html#220" class="Record"
+  >&#8868;</a
+  ><a name="1953"
+  > </a
+  ><a name="1954" href="Function.html#2481" class="Function Operator"
+  >&#8715;</a
   ><a name="1955"
   > </a
-  ><a name="1956" href="Session.Examples.BankAccount.html#1956" class="Bound"
-  >_</a
-  ><a name="1957"
-  > </a
-  ><a name="1958" class="Symbol"
-  >&#8594;</a
+  ><a name="1956" href="Session.html#2755" class="Function"
+  >`&#928;^</a
   ><a name="1959"
   > </a
-  ><a name="1960" href="Session.html#821" class="Function"
-  >`&#931;^</a
-  ><a name="1963"
-  > </a
-  ><a name="1964" class="Symbol"
-  >(</a
-  ><a name="1965" href="Data.Maybe.Core.html#315" class="Datatype"
-  >1+</a
-  ><a name="1967"
-  > </a
-  ><a name="1968" href="Data.Nat.html#698" class="Datatype"
+  ><a name="1960" href="Data.Nat.html#663" class="Datatype"
   >&#8469;</a
-  ><a name="1969" class="Symbol"
-  >)</a
-  ><a name="1970"
-  > </a
-  ><a name="1971" class="Symbol"
+  ><a name="1961"
+  >  </a
+  ><a name="1963" class="Symbol"
   >&#955;</a
+  ><a name="1964"
+  > </a
+  ><a name="1965" href="Session.Examples.BankAccount.html#1965" class="Bound"
+  >_</a
+  ><a name="1966"
+  > </a
+  ><a name="1967" class="Symbol"
+  >&#8594;</a
+  ><a name="1968"
+  > </a
+  ><a name="1969" href="Session.html#2751" class="Function"
+  >`&#931;^</a
   ><a name="1972"
   > </a
-  ><a name="1973" href="Session.Examples.BankAccount.html#1973" class="Bound"
-  >_</a
-  ><a name="1974"
-  > </a
-  ><a name="1975" class="Symbol"
-  >&#8594;</a
+  ><a name="1973" class="Symbol"
+  >(</a
+  ><a name="1974" href="Data.Maybe.Core.html#315" class="Datatype"
+  >1+</a
   ><a name="1976"
   > </a
-  ><a name="1977" href="Session.html#321" class="InductiveConstructor"
-  >`I</a
+  ><a name="1977" href="Data.Nat.html#663" class="Datatype"
+  >&#8469;</a
+  ><a name="1978" class="Symbol"
+  >)</a
   ><a name="1979"
   > </a
-  ><a name="1980" href="Base.html#168" class="InductiveConstructor"
-  >tt</a
-  ><a name="1982" class="Symbol"
-  >)</a
+  ><a name="1980" class="Symbol"
+  >&#955;</a
+  ><a name="1981"
+  > </a
+  ><a name="1982" href="Session.Examples.BankAccount.html#1982" class="Bound"
+  >_</a
   ><a name="1983"
   > </a
-  ><a name="1984" href="Data.Product.html#509" class="InductiveConstructor Operator"
-  >&#171;&#171;</a
-  ><a name="1986" class="Symbol"
+  ><a name="1984" class="Symbol"
+  >&#8594;</a
+  ><a name="1985"
+  > </a
+  ><a name="1986" href="Session.html#2158" class="InductiveConstructor"
+  >`I</a
+  ><a name="1988"
+  > </a
+  ><a name="1989" class="InductiveConstructor"
+  >tt</a
+  ><a name="1991" class="Symbol"
   >)</a
-  ><a name="1987"
+  ><a name="1992"
+  > </a
+  ><a name="1993" href="Session.html#7029" class="InductiveConstructor Operator"
+  >&#171;&#171;</a
+  ><a name="1995" class="Symbol"
+  >)</a
+  ><a name="1996"
   >
                     </a
-  ><a name="2008" href="Session.html#12647" class="Function Operator"
+  ><a name="2017" href="Session.html#18617" class="Function Operator"
   >[IO</a
-  ><a name="2011"
+  ><a name="2020"
   > </a
-  ><a name="2012" href="Data.Nat.html#698" class="Datatype"
+  ><a name="2021" href="Data.Nat.html#663" class="Datatype"
   >&#8469;</a
-  ><a name="2013"
+  ><a name="2022"
   > </a
-  ><a name="2014" href="Session.html#12647" class="Function Operator"
+  ><a name="2023" href="Session.html#18617" class="Function Operator"
   >]&gt;</a
-  ><a name="2016"
+  ><a name="2025"
   >
                     </a
-  ><a name="2037" href="Data.List.html#696" class="InductiveConstructor"
+  ><a name="2046" href="Data.List.html#696" class="InductiveConstructor"
   >[]</a
-  ><a name="2039"
+  ><a name="2048"
   >
 </a
-  ><a name="2040" href="Session.Examples.BankAccount.html#1913" class="Function"
+  ><a name="2049" href="Session.Examples.BankAccount.html#1922" class="Function"
   >fund</a
-  ><a name="2044"
+  ><a name="2053"
   > </a
-  ><a name="2045" href="Session.Examples.BankAccount.html#2045" class="Bound"
+  ><a name="2054" href="Session.Examples.BankAccount.html#2054" class="Bound"
   >init</a
-  ><a name="2049"
-  > </a
-  ><a name="2050" class="Symbol"
-  >=</a
-  ><a name="2051"
-  > </a
-  ><a name="2052" href="Session.html#11490" class="Function"
-  >put</a
-  ><a name="2055"
-  > </a
-  ><a name="2056" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
-  >Z|</a
   ><a name="2058"
   > </a
-  ><a name="2059" href="Session.Examples.BankAccount.html#2045" class="Bound"
+  ><a name="2059" class="Symbol"
+  >=</a
+  ><a name="2060"
+  > </a
+  ><a name="2061" href="Session.html#17203" class="Function"
+  >put</a
+  ><a name="2064"
+  > </a
+  ><a name="2065" href="Session.Base.html#2899" class="InductiveConstructor"
+  >Z|</a
+  ><a name="2067"
+  > </a
+  ><a name="2068" href="Session.Examples.BankAccount.html#2054" class="Bound"
   >init</a
-  ><a name="2063"
+  ><a name="2072"
   >
           </a
-  ><a name="2074" href="Session.html#11371" class="Function Operator"
+  ><a name="2083" href="Session.html#16926" class="Function Operator"
   >&#187;</a
-  ><a name="2075"
+  ><a name="2084"
   > </a
-  ><a name="2076" href="Session.html#11699" class="Function"
+  ><a name="2085" href="Session.html#17397" class="Function"
   >get</a
-  ><a name="2079"
+  ><a name="2088"
   > </a
-  ><a name="2080" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  ><a name="2089" href="Session.Base.html#2899" class="InductiveConstructor"
   >Z|</a
-  ><a name="2082"
+  ><a name="2091"
   > </a
-  ><a name="2083" class="Symbol"
+  ><a name="2092" class="Symbol"
   >(</a
-  ><a name="2084" href="Data.Maybe.html#984" class="Function"
+  ><a name="2093" href="Data.Maybe.html#984" class="Function"
   >1+.maybe</a
-  ><a name="2092"
+  ><a name="2101"
   > </a
-  ><a name="2093" class="Symbol"
+  ><a name="2102" class="Symbol"
   >(&#955;</a
-  ><a name="2095"
+  ><a name="2104"
   > </a
-  ><a name="2096" href="Session.Examples.BankAccount.html#2096" class="Bound"
+  ><a name="2105" href="Session.Examples.BankAccount.html#2105" class="Bound"
   >n</a
-  ><a name="2097"
-  > </a
-  ><a name="2098" class="Symbol"
-  >&#8594;</a
-  ><a name="2099"
-  > </a
-  ><a name="2100" href="Session.html#9609" class="InductiveConstructor Operator"
-  >end</a
-  ><a name="2103"
-  > </a
-  ><a name="2104" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
-  >Z|</a
   ><a name="2106"
   > </a
-  ><a name="2107" href="Session.html#11371" class="Function Operator"
-  >&#187;</a
+  ><a name="2107" class="Symbol"
+  >&#8594;</a
   ><a name="2108"
   > </a
-  ><a name="2109" href="Session.html#9533" class="InductiveConstructor Operator"
-  >&#8657;</a
-  ><a name="2110"
+  ><a name="2109" href="Session.html#16198" class="InductiveConstructor"
+  >end</a
+  ><a name="2112"
   > </a
-  ><a name="2111" href="IO.Primitive.html#588" class="Postulate"
-  >return</a
+  ><a name="2113" href="Session.Base.html#2899" class="InductiveConstructor"
+  >Z|</a
+  ><a name="2115"
+  > </a
+  ><a name="2116" href="Session.html#16926" class="Function Operator"
+  >&#187;</a
   ><a name="2117"
   > </a
-  ><a name="2118" href="Session.Examples.BankAccount.html#2096" class="Bound"
-  >n</a
+  ><a name="2118" href="Session.html#14662" class="InductiveConstructor Operator"
+  >&#8657;</a
   ><a name="2119"
+  > </a
+  ><a name="2120" href="IO.Primitive.html#588" class="Postulate"
+  >return</a
+  ><a name="2126"
+  > </a
+  ><a name="2127" href="Session.Examples.BankAccount.html#2105" class="Bound"
+  >n</a
+  ><a name="2128"
   >   </a
-  ><a name="2122" class="Symbol"
+  ><a name="2131" class="Symbol"
   >)</a
-  ><a name="2123"
+  ><a name="2132"
   >
                              </a
-  ><a name="2153" class="Symbol"
+  ><a name="2162" class="Symbol"
   >(</a
-  ><a name="2154"
-  >      </a
-  ><a name="2160" href="Session.html#9609" class="InductiveConstructor Operator"
-  >end</a
   ><a name="2163"
+  >      </a
+  ><a name="2169" href="Session.html#16198" class="InductiveConstructor"
+  >end</a
+  ><a name="2172"
   > </a
-  ><a name="2164" href="Data.List.Any.html#1169" class="InductiveConstructor Operator"
+  ><a name="2173" href="Session.Base.html#2899" class="InductiveConstructor"
   >Z|</a
-  ><a name="2166"
+  ><a name="2175"
   > </a
-  ><a name="2167" href="Session.html#11371" class="Function Operator"
+  ><a name="2176" href="Session.html#16926" class="Function Operator"
   >&#187;</a
-  ><a name="2168"
-  > </a
-  ><a name="2169" href="Session.html#9533" class="InductiveConstructor Operator"
-  >&#8657;</a
-  ><a name="2170"
-  > </a
-  ><a name="2171" href="IO.Primitive.html#588" class="Postulate"
-  >return</a
   ><a name="2177"
   > </a
-  ><a name="2178" href="Session.Examples.BankAccount.html#2045" class="Bound"
+  ><a name="2178" href="Session.html#14662" class="InductiveConstructor Operator"
+  >&#8657;</a
+  ><a name="2179"
+  > </a
+  ><a name="2180" href="IO.Primitive.html#588" class="Postulate"
+  >return</a
+  ><a name="2186"
+  > </a
+  ><a name="2187" href="Session.Examples.BankAccount.html#2054" class="Bound"
   >init</a
-  ><a name="2182" class="Symbol"
+  ><a name="2191" class="Symbol"
   >))</a
-  ><a name="2184"
+  ><a name="2193"
   ></pre>
 
 <pre></a
-  ><a name="2210" href="Session.Examples.BankAccount.html#2210" class="Function"
+  ><a name="2219" href="Session.Examples.BankAccount.html#2219" class="Function"
   >test</a
-  ><a name="2214"
-  > </a
-  ><a name="2215" class="Symbol"
-  >:</a
-  ><a name="2216"
-  > </a
-  ><a name="2217" href="Session.html#12685" class="Function"
-  >IOProc</a
   ><a name="2223"
   > </a
-  ><a name="2224" href="Base.html#136" class="Record"
-  >&#8868;</a
+  ><a name="2224" class="Symbol"
+  >:</a
   ><a name="2225"
-  >
-</a
-  ><a name="2226" href="Session.Examples.BankAccount.html#2210" class="Function"
-  >test</a
-  ><a name="2230"
   > </a
-  ><a name="2231" class="Symbol"
-  >=</a
+  ><a name="2226" href="Session.html#18655" class="Function"
+  >IOProc</a
   ><a name="2232"
   > </a
-  ><a name="2233" href="Session.Examples.BankAccount.html#2233" class="Bound"
-  >l</a
+  ><a name="2233" href="Session.Base.html#220" class="Record"
+  >&#8868;</a
   ><a name="2234"
+  >
+</a
+  ><a name="2235" href="Session.Examples.BankAccount.html#2219" class="Function"
+  >test</a
+  ><a name="2239"
   > </a
-  ><a name="2235" href="Session.html#11182" class="Function"
-  >&lt;-</a
-  ><a name="2237"
-  > </a
-  ><a name="2238" href="Session.html#9609" class="InductiveConstructor Operator"
-  >new</a
+  ><a name="2240" class="Symbol"
+  >=</a
   ><a name="2241"
-  >
-     </a
-  ><a name="2247" href="Session.html#11182" class="Function"
-  >&#8943;</a
-  ><a name="2248"
   > </a
-  ><a name="2249" href="Session.Examples.BankAccount.html#2249" class="Bound"
-  >r</a
-  ><a name="2250"
+  ><a name="2242" href="Session.Examples.BankAccount.html#2242" class="Bound"
+  >l</a
+  ><a name="2243"
   > </a
-  ><a name="2251" href="Session.html#11182" class="Function"
+  ><a name="2244" href="Session.html#16737" class="Function"
   >&lt;-</a
-  ><a name="2253"
+  ><a name="2246"
   > </a
-  ><a name="2254" href="Session.html#9609" class="InductiveConstructor Operator"
+  ><a name="2247" href="Session.html#15458" class="InductiveConstructor"
   >new</a
-  ><a name="2257"
+  ><a name="2250"
   >
      </a
-  ><a name="2263" href="Session.html#11182" class="Function"
+  ><a name="2256" href="Session.html#16737" class="Function"
   >&#8943;</a
-  ><a name="2264"
+  ><a name="2257"
   > </a
-  ><a name="2265" href="Session.html#9609" class="InductiveConstructor Operator"
-  >fork</a
-  ><a name="2269"
+  ><a name="2258" href="Session.Examples.BankAccount.html#2258" class="Bound"
+  >r</a
+  ><a name="2259"
   > </a
-  ><a name="2270" class="Symbol"
-  >(</a
-  ><a name="2271" href="Data.List.All.html#779" class="InductiveConstructor"
-  >[]</a
+  ><a name="2260" href="Session.html#16737" class="Function"
+  >&lt;-</a
+  ><a name="2262"
+  > </a
+  ><a name="2263" href="Session.html#15458" class="InductiveConstructor"
+  >new</a
+  ><a name="2266"
+  >
+     </a
+  ><a name="2272" href="Session.html#16737" class="Function"
+  >&#8943;</a
   ><a name="2273"
   > </a
-  ><a name="2274" href="Data.List.All.html#796" class="InductiveConstructor Operator"
-  >,&#775;</a
-  ><a name="2276"
+  ><a name="2274" href="Session.html#15384" class="InductiveConstructor"
+  >fork</a
+  ><a name="2278"
   > </a
-  ><a name="2277" href="Session.html#1950" class="InductiveConstructor"
-  >+-</a
-  ><a name="2279"
-  > </a
-  ><a name="2280" href="Data.List.All.html#796" class="InductiveConstructor Operator"
-  >,&#775;</a
-  ><a name="2282"
-  >  </a
-  ><a name="2284" href="Session.html#1946" class="InductiveConstructor"
-  >+</a
-  ><a name="2285" class="Symbol"
-  >)</a
-  ><a name="2286"
-  > </a
-  ><a name="2287" class="Symbol"
+  ><a name="2279" class="Symbol"
   >(</a
+  ><a name="2280" href="Data.List.All.html#779" class="InductiveConstructor"
+  >[]</a
+  ><a name="2282"
+  > </a
+  ><a name="2283" href="Session.Base.html#2118" class="InductiveConstructor Operator"
+  >,&#775;</a
+  ><a name="2285"
+  > </a
+  ><a name="2286" href="Session.html#4888" class="InductiveConstructor"
+  >+-</a
   ><a name="2288"
+  > </a
+  ><a name="2289" href="Session.Base.html#2118" class="InductiveConstructor Operator"
+  >,&#775;</a
+  ><a name="2291"
   >  </a
-  ><a name="2290" href="Session.Examples.BankAccount.html#2290" class="Bound"
+  ><a name="2293" href="Session.html#4884" class="InductiveConstructor"
+  >+</a
+  ><a name="2294" class="Symbol"
+  >)</a
+  ><a name="2295"
+  > </a
+  ><a name="2296" class="Symbol"
+  >(</a
+  ><a name="2297"
+  >  </a
+  ><a name="2299" href="Session.Examples.BankAccount.html#2299" class="Bound"
   >res</a
-  ><a name="2293"
+  ><a name="2302"
   > </a
-  ><a name="2294" href="Session.html#11182" class="Function"
+  ><a name="2303" href="Session.html#16737" class="Function"
   >&lt;-</a
-  ><a name="2296"
+  ><a name="2305"
   > </a
-  ><a name="2297" href="Session.Examples.BankAccount.html#1913" class="Function"
+  ><a name="2306" href="Session.Examples.BankAccount.html#1922" class="Function"
   >fund</a
-  ><a name="2301"
+  ><a name="2310"
   > </a
-  ><a name="2302" class="Number"
+  ><a name="2311" class="Number"
   >10</a
-  ><a name="2304"
+  ><a name="2313"
   >
                             </a
-  ><a name="2333" href="Session.html#11182" class="Function"
+  ><a name="2342" href="Session.html#16737" class="Function"
   >&#8943;</a
-  ><a name="2334"
+  ><a name="2343"
   > </a
-  ><a name="2335" href="Session.html#9533" class="InductiveConstructor Operator"
+  ><a name="2344" href="Session.html#14662" class="InductiveConstructor Operator"
   >&#8657;</a
-  ><a name="2336"
+  ><a name="2345"
   > </a
-  ><a name="2337" href="Session.Examples.BankAccount.html#2519" class="Function"
+  ><a name="2346" href="Session.Examples.BankAccount.html#2528" class="Function"
   >log</a
-  ><a name="2340"
+  ><a name="2349"
   > </a
-  ><a name="2341" class="String"
+  ><a name="2350" class="String"
   >&quot;Source = &quot;</a
-  ><a name="2352"
+  ><a name="2361"
   > </a
-  ><a name="2353" href="Session.Examples.BankAccount.html#2290" class="Bound"
+  ><a name="2362" href="Session.Examples.BankAccount.html#2299" class="Bound"
   >res</a
-  ><a name="2356" class="Symbol"
+  ><a name="2365" class="Symbol"
   >)</a
-  ><a name="2357"
+  ><a name="2366"
   >
      </a
-  ><a name="2363" href="Session.html#11371" class="Function Operator"
+  ><a name="2372" href="Session.html#16926" class="Function Operator"
   >&#187;</a
-  ><a name="2364"
-  > </a
-  ><a name="2365" href="Session.html#9609" class="InductiveConstructor Operator"
-  >fork</a
-  ><a name="2369"
-  > </a
-  ><a name="2370" class="Symbol"
-  >(</a
-  ><a name="2371" href="Data.List.All.html#779" class="InductiveConstructor"
-  >[]</a
   ><a name="2373"
   > </a
-  ><a name="2374" href="Data.List.All.html#796" class="InductiveConstructor Operator"
-  >,&#775;</a
-  ><a name="2376"
-  > </a
-  ><a name="2377" href="Base.html#4867" class="InductiveConstructor"
-  >+</a
+  ><a name="2374" href="Session.html#15384" class="InductiveConstructor"
+  >fork</a
   ><a name="2378"
-  >  </a
-  ><a name="2380" href="Data.List.All.html#796" class="InductiveConstructor Operator"
-  >,&#775;</a
+  > </a
+  ><a name="2379" class="Symbol"
+  >(</a
+  ><a name="2380" href="Data.List.All.html#779" class="InductiveConstructor"
+  >[]</a
   ><a name="2382"
   > </a
-  ><a name="2383" href="Session.html#1950" class="InductiveConstructor"
-  >+-</a
-  ><a name="2385" class="Symbol"
-  >)</a
-  ><a name="2386"
+  ><a name="2383" href="Session.Base.html#2118" class="InductiveConstructor Operator"
+  >,&#775;</a
+  ><a name="2385"
   > </a
-  ><a name="2387" class="Symbol"
-  >(</a
-  ><a name="2388"
+  ><a name="2386" href="Session.Base.html#4873" class="InductiveConstructor"
+  >+</a
+  ><a name="2387"
   >  </a
-  ><a name="2390" href="Session.Examples.BankAccount.html#2390" class="Bound"
+  ><a name="2389" href="Session.Base.html#2118" class="InductiveConstructor Operator"
+  >,&#775;</a
+  ><a name="2391"
+  > </a
+  ><a name="2392" href="Session.html#4888" class="InductiveConstructor"
+  >+-</a
+  ><a name="2394" class="Symbol"
+  >)</a
+  ><a name="2395"
+  > </a
+  ><a name="2396" class="Symbol"
+  >(</a
+  ><a name="2397"
+  >  </a
+  ><a name="2399" href="Session.Examples.BankAccount.html#2399" class="Bound"
   >res</a
-  ><a name="2393"
+  ><a name="2402"
   > </a
-  ><a name="2394" href="Session.html#11182" class="Function"
+  ><a name="2403" href="Session.html#16737" class="Function"
   >&lt;-</a
-  ><a name="2396"
+  ><a name="2405"
   > </a
-  ><a name="2397" href="Session.Examples.BankAccount.html#1913" class="Function"
+  ><a name="2406" href="Session.Examples.BankAccount.html#1922" class="Function"
   >fund</a
-  ><a name="2401"
+  ><a name="2410"
   > </a
-  ><a name="2402" class="Number"
+  ><a name="2411" class="Number"
   >30</a
-  ><a name="2404"
+  ><a name="2413"
   >
                             </a
-  ><a name="2433" href="Session.html#11182" class="Function"
+  ><a name="2442" href="Session.html#16737" class="Function"
   >&#8943;</a
-  ><a name="2434"
+  ><a name="2443"
   > </a
-  ><a name="2435" href="Session.html#9533" class="InductiveConstructor Operator"
+  ><a name="2444" href="Session.html#14662" class="InductiveConstructor Operator"
   >&#8657;</a
-  ><a name="2436"
+  ><a name="2445"
   > </a
-  ><a name="2437" href="Session.Examples.BankAccount.html#2519" class="Function"
+  ><a name="2446" href="Session.Examples.BankAccount.html#2528" class="Function"
   >log</a
-  ><a name="2440"
+  ><a name="2449"
   > </a
-  ><a name="2441" class="String"
+  ><a name="2450" class="String"
   >&quot;Target = &quot;</a
-  ><a name="2452"
+  ><a name="2461"
   > </a
-  ><a name="2453" href="Session.Examples.BankAccount.html#2390" class="Bound"
+  ><a name="2462" href="Session.Examples.BankAccount.html#2399" class="Bound"
   >res</a
-  ><a name="2456" class="Symbol"
+  ><a name="2465" class="Symbol"
   >)</a
-  ><a name="2457"
+  ><a name="2466"
   >
      </a
-  ><a name="2463" href="Session.html#11371" class="Function Operator"
+  ><a name="2472" href="Session.html#16926" class="Function Operator"
   >&#187;</a
-  ><a name="2464"
+  ><a name="2473"
   > </a
-  ><a name="2465" href="Session.Examples.BankAccount.html#845" class="Function"
+  ><a name="2474" href="Session.Examples.BankAccount.html#854" class="Function"
   >moveMoney</a
-  ><a name="2474"
+  ><a name="2483"
   > </a
-  ><a name="2475" class="Number"
+  ><a name="2484" class="Number"
   >8</a
-  ><a name="2476"
+  ><a name="2485"
   >
   </a
-  ><a name="2479" class="Keyword"
+  ><a name="2488" class="Keyword"
   >where</a
-  ><a name="2484"
+  ><a name="2493"
   > </a
-  ><a name="2485" class="Keyword"
+  ><a name="2494" class="Keyword"
   >open</a
-  ><a name="2489"
+  ><a name="2498"
   > </a
-  ><a name="2490" class="Keyword"
+  ><a name="2499" class="Keyword"
   >import</a
-  ><a name="2496"
+  ><a name="2505"
   > </a
-  ><a name="2497" href="Data.Nat.Show.html#1" class="Module"
+  ><a name="2506" href="Data.Nat.Show.html#1" class="Module"
   >Data.Nat.Show</a
-  ><a name="2510"
+  ><a name="2519"
   >
         </a
-  ><a name="2519" href="Session.Examples.BankAccount.html#2519" class="Function"
+  ><a name="2528" href="Session.Examples.BankAccount.html#2528" class="Function"
   >log</a
-  ><a name="2522"
+  ><a name="2531"
   > </a
-  ><a name="2523" class="Symbol"
+  ><a name="2532" class="Symbol"
   >:</a
-  ><a name="2524"
+  ><a name="2533"
   > </a
-  ><a name="2525" class="Symbol"
+  ><a name="2534" class="Symbol"
   >_</a
-  ><a name="2526"
-  > </a
-  ><a name="2527" class="Symbol"
-  >&#8594;</a
-  ><a name="2528"
-  > </a
-  ><a name="2529" href="Data.Nat.html#698" class="Datatype"
-  >&#8469;</a
-  ><a name="2530"
-  > </a
-  ><a name="2531" class="Symbol"
-  >&#8594;</a
-  ><a name="2532"
-  > </a
-  ><a name="2533" href="IO.Primitive.html#448" class="Postulate"
-  >IO</a
   ><a name="2535"
   > </a
-  ><a name="2536" href="Base.html#136" class="Record"
-  >&#8868;</a
+  ><a name="2536" class="Symbol"
+  >&#8594;</a
   ><a name="2537"
+  > </a
+  ><a name="2538" href="Data.Nat.html#663" class="Datatype"
+  >&#8469;</a
+  ><a name="2539"
+  > </a
+  ><a name="2540" class="Symbol"
+  >&#8594;</a
+  ><a name="2541"
+  > </a
+  ><a name="2542" href="IO.Primitive.html#448" class="Postulate"
+  >IO</a
+  ><a name="2544"
+  > </a
+  ><a name="2545" href="Session.Base.html#220" class="Record"
+  >&#8868;</a
+  ><a name="2546"
   >
         </a
-  ><a name="2546" href="Session.Examples.BankAccount.html#2519" class="Function"
+  ><a name="2555" href="Session.Examples.BankAccount.html#2528" class="Function"
   >log</a
-  ><a name="2549"
+  ><a name="2558"
   > </a
-  ><a name="2550" href="Session.Examples.BankAccount.html#2550" class="Bound"
+  ><a name="2559" href="Session.Examples.BankAccount.html#2559" class="Bound"
   >xs</a
-  ><a name="2552"
+  ><a name="2561"
   > </a
-  ><a name="2553" href="Session.Examples.BankAccount.html#2553" class="Bound"
+  ><a name="2562" href="Session.Examples.BankAccount.html#2562" class="Bound"
   >n</a
-  ><a name="2554"
-  > </a
-  ><a name="2555" class="Symbol"
-  >=</a
-  ><a name="2556"
-  > </a
-  ><a name="2557" href="IO.Primitive.html#1466" class="Postulate"
-  >putStr</a
   ><a name="2563"
-  >   </a
-  ><a name="2566" href="Base.html#4675" class="Function Operator"
-  >&#171;</a
-  ><a name="2567"
   > </a
-  ><a name="2568" href="Session.Examples.BankAccount.html#2550" class="Bound"
-  >xs</a
-  ><a name="2570"
-  >     </a
-  ><a name="2575" href="Base.html#4675" class="Function Operator"
-  >&#187;</a
+  ><a name="2564" class="Symbol"
+  >=</a
+  ><a name="2565"
+  > </a
+  ><a name="2566" href="IO.Primitive.html#1466" class="Postulate"
+  >putStr</a
+  ><a name="2572"
+  >   </a
+  ><a name="2575" href="Session.Base.html#4681" class="Function Operator"
+  >&#171;</a
   ><a name="2576"
   > </a
-  ><a name="2577" href="IO.Primitive.html#628" class="Postulate Operator"
-  >&gt;&gt;=</a
-  ><a name="2580"
+  ><a name="2577" href="Session.Examples.BankAccount.html#2559" class="Bound"
+  >xs</a
+  ><a name="2579"
+  >     </a
+  ><a name="2584" href="Session.Base.html#4681" class="Function Operator"
+  >&#187;</a
+  ><a name="2585"
   > </a
-  ><a name="2581" class="Symbol"
-  >&#955;</a
-  ><a name="2582"
-  > </a
-  ><a name="2583" href="Session.Examples.BankAccount.html#2583" class="Bound"
-  >_</a
-  ><a name="2584"
-  > </a
-  ><a name="2585" class="Symbol"
-  >&#8594;</a
-  ><a name="2586"
+  ><a name="2586" href="Session.html#19587" class="Function Operator"
+  >&gt;&gt;</a
+  ><a name="2588"
   >
                    </a
-  ><a name="2606" href="IO.Primitive.html#1501" class="Postulate"
+  ><a name="2608" href="IO.Primitive.html#1501" class="Postulate"
   >putStrLn</a
-  ><a name="2614"
-  > </a
-  ><a name="2615" href="Base.html#4675" class="Function Operator"
-  >&#171;</a
   ><a name="2616"
   > </a
-  ><a name="2617" href="Data.Nat.Show.html#941" class="Function"
-  >show</a
-  ><a name="2621"
+  ><a name="2617" href="Session.Base.html#4681" class="Function Operator"
+  >&#171;</a
+  ><a name="2618"
   > </a
-  ><a name="2622" href="Session.Examples.BankAccount.html#2553" class="Bound"
-  >n</a
+  ><a name="2619" href="Data.Nat.Show.html#941" class="Function"
+  >show</a
   ><a name="2623"
   > </a
-  ><a name="2624" href="Base.html#4675" class="Function Operator"
-  >&#187;</a
+  ><a name="2624" href="Session.Examples.BankAccount.html#2562" class="Bound"
+  >n</a
   ><a name="2625"
   > </a
-  ><a name="2626" href="IO.Primitive.html#628" class="Postulate Operator"
-  >&gt;&gt;=</a
-  ><a name="2629"
+  ><a name="2626" href="Session.Base.html#4681" class="Function Operator"
+  >&#187;</a
+  ><a name="2627"
   > </a
-  ><a name="2630" class="Symbol"
-  >&#955;</a
-  ><a name="2631"
-  > </a
-  ><a name="2632" href="Session.Examples.BankAccount.html#2632" class="Bound"
-  >_</a
-  ><a name="2633"
-  > </a
-  ><a name="2634" class="Symbol"
-  >&#8594;</a
-  ><a name="2635"
+  ><a name="2628" href="Session.html#19587" class="Function Operator"
+  >&gt;&gt;</a
+  ><a name="2630"
   >
                    </a
-  ><a name="2655" href="IO.Primitive.html#588" class="Postulate"
+  ><a name="2650" href="IO.Primitive.html#588" class="Postulate"
   >return</a
-  ><a name="2661"
+  ><a name="2656"
   > </a
-  ><a name="2662" class="Symbol"
+  ><a name="2657" class="Symbol"
   >_</a
-  ><a name="2663"
+  ><a name="2658"
   ></pre>
 
 <pre></a
-  ><a name="2689" href="Session.Examples.BankAccount.html#2689" class="Function"
+  ><a name="2684" href="Session.Examples.BankAccount.html#2684" class="Function"
   >main</a
+  ><a name="2688"
+  > </a
+  ><a name="2689" class="Symbol"
+  >:</a
+  ><a name="2690"
+  > </a
+  ><a name="2691" href="IO.Primitive.html#448" class="Postulate"
+  >IO</a
   ><a name="2693"
   > </a
-  ><a name="2694" class="Symbol"
-  >:</a
-  ><a name="2695"
-  > </a
-  ><a name="2696" href="IO.Primitive.html#448" class="Postulate"
-  >IO</a
-  ><a name="2698"
-  > </a
-  ><a name="2699" href="Unit.html#194" class="Function"
+  ><a name="2694" href="Unit.html#194" class="Function"
   >C.&lt;&gt;</a
-  ><a name="2703"
+  ><a name="2698"
   >
 </a
-  ><a name="2704" href="Session.Examples.BankAccount.html#2689" class="Function"
+  ><a name="2699" href="Session.Examples.BankAccount.html#2684" class="Function"
   >main</a
-  ><a name="2708"
+  ><a name="2703"
   > </a
-  ><a name="2709" class="Symbol"
+  ><a name="2704" class="Symbol"
   >=</a
-  ><a name="2710"
+  ><a name="2705"
   > </a
-  ><a name="2711" href="Session.html#13684" class="Function"
+  ><a name="2706" href="Session.html#20325" class="Function"
   >run</a
+  ><a name="2709"
+  > </a
+  ><a name="2710" href="Session.Examples.BankAccount.html#2219" class="Function"
+  >test</a
   ><a name="2714"
   > </a
-  ><a name="2715" href="Session.Examples.BankAccount.html#2210" class="Function"
-  >test</a
-  ><a name="2719"
-  > </a
-  ><a name="2720" href="Data.List.All.html#779" class="InductiveConstructor"
+  ><a name="2715" href="Data.List.All.html#779" class="InductiveConstructor"
   >[]</a
-  ><a name="2722"
+  ><a name="2717"
   > </a
-  ><a name="2723" href="Session.html#13163" class="Function Operator"
+  ><a name="2718" href="Session.html#19587" class="Function Operator"
   >&gt;&gt;</a
-  ><a name="2725"
+  ><a name="2720"
   > </a
-  ><a name="2726" href="Control.Concurrent.html#342" class="Function"
+  ><a name="2721" href="Control.Concurrent.html#342" class="Postulate"
   >C.threadDelay</a
-  ><a name="2739"
+  ><a name="2734"
   > </a
-  ><a name="2740" href="Control.Concurrent.html#322" class="Function"
+  ><a name="2735" href="Control.Concurrent.html#322" class="Postulate"
   >C.onesec</a
-  ><a name="2748"
+  ><a name="2743"
   ></pre></body></html>
