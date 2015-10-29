@@ -6,16 +6,17 @@
 
 @import url(http://fonts.googleapis.com/css?family=Droid Sans);
 
-body { margin-left:   20%;
-       margin-right:  20%;
+body { /* margin-left:   20%; */
+       /* margin-right:  20%; */
        line-height:  110%}
 
-html { font-family: Georgia; font-size : 105%}
+html { font-family: Georgia; font-size : 100%}
 h1   { font-family: Droid Sans;
        padding: 2% 1% 2% 1%;
-       line-height: 110% }
-h2   { font-family: Droid Sans; padding: 2% 0% 2% 0% }
-pre  { font-family: Agda; font-size : 90%}
+       line-height: 40% }
+h2   { font-family: Droid Sans; padding: 1% 0% 1% 0% }
+pre  { font-family: Agda; font-size : 80%}
+p    { max-width: 800px }
 
 /* Aspects. */
 .Comment       { color: #B22222 }
@@ -50,3 +51,5 @@ pre  { font-family: Agda; font-size : 90%}
 /* Standard attributes. */
 a { text-decoration: none }
 a[href]:hover { background-color: #B4EEB4 }
+
+.hide { display: none }
