@@ -1,0 +1,3 @@
+[submodule "haskell-eff-20151017"]
+	path = haskell-eff-20151017
+	url = https://github.com/ma82/haskell-eff-20151017.git
